@@ -1,0 +1,22 @@
+version: '2'
+
+services:
+
+  wordpress:
+    build: .
+    container_name: wordpress
+    ports:
+      - 80:80
+    environment:
+      WORDPRESS_DB_PASSWORD: example
+    volumes:
+      - $PWD:/var/www/html/wp-content/plugins/wp-sacloud-webaccel
+    links:
+      - mysql
+
+  mysql:
+    image: mariadb
+    environment:
+      MYSQL_ROOT_PASSWORD: example
+    volumes:
+      - $PWD/.data:/var/lib/mysql
