@@ -11,6 +11,8 @@
 [サブドメイン方式](http://cloud-news.sakura.ad.jp/webaccel/manual02/)での連携にも対応しており、
 メディアファイルのURLのみをウェブアクセラレータのサブドメインURLに書き換えることができます。
 
+**注意:現在開発中です。テスト環境でのみご利用ください。**
+
 ## スクリーンショット
 
 ![screenshot-1.png](screenshot-1.png)
