@@ -1357,36 +1357,26 @@ class SacloudClient{
         return sprintf(self::API_BASE_URL_FORAMT , $this->zone , self::API_WEBACCEL_SUFFIX) . "deletecache";
     }
 
-    private function setupCurl($url){
-
-        $curl = curl_init($url);
-        curl_setopt($curl , CURLOPT_USERPWD, sprintf("%s:%s" , $this->apiKey , $this->apiSecret));
-        curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
-        curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-
-        return $curl;
+    private function getRequestArgs(){
+        return array(
+            'headers' => array(
+                'Authorization' => 'Basic ' . base64_encode( sprintf("%s:%s" , $this->apiKey , $this->apiSecret) )
+            ),
+            'sslverify' => false
+        );
     }
 
     private function Get($url) {
-        //TODO use wp_remote_get
-        $curl = $this->setupCurl($url);
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'GET'); // get
-        $response = curl_exec($curl);
+        $response = wp_remote_retrieve_body(wp_remote_get($url , $this->getRequestArgs()));
         $result = json_decode($response, true);
-        curl_close($curl);
         return $result;
     }
 
     private function Post($url , $data){
-        //TODO use wp_remote_post
-        $curl = $this->setupCurl($url);
-
-        curl_setopt($curl, CURLOPT_CUSTOMREQUEST, 'POST'); // post
-        curl_setopt($curl, CURLOPT_POSTFIELDS, json_encode($data));
-
-        $response = curl_exec($curl);
+        $args = $this->getRequestArgs();
+        $args['body'] = json_encode($data);
+        $response = wp_remote_retrieve_body(wp_remote_post($url , $args));
         $result = json_decode($response, true);
-        curl_close($curl);
 
         return $result;
     }
