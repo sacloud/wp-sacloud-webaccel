@@ -29,7 +29,8 @@ function sacloud_webaccel_start(){
 
         // for media(attachment)
         if (sacloud_webaccel_get_option("use-subdomain") == 1) {
-            add_filter('wp_get_attachment_url', 'sacloud_webaccel_subdomain_url');
+            //add_filter('wp_get_attachment_url', 'sacloud_webaccel_subdomain_url');
+            add_filter( 'the_content', 'sacloud_webaccel_filter_the_content', 888888 );
         }
         add_action('add_attachment', 'sacloud_webaccel_delete_cache_by_id');
         add_action('edit_attachment', 'sacloud_webaccel_delete_cache_by_id');
@@ -65,6 +66,8 @@ function sacloud_webaccel_start(){
 
         // add HTTP header
         add_action('wp' , 'sacloud_webaccel_send_cache_header');
+
+
     }
     // write .htaccess for Mediafile
     add_action('add_option_sacloud-webaccel-options', 'sacloud_webaccel_options_handle_add' , 10 , 2);
@@ -826,6 +829,32 @@ function sacloud_webaccel_log( $msg ) {
     return true;
 }
 
+/**
+ * Match all images and any relevant <a> tags in a block of HTML.
+ * Copied from JetPack[class.photon.php](https://jetpack.com)
+ *
+ * @param string $content Some HTML.
+ * @return array An array of $images matches, where $images[0] is
+ *         an array of full matches, and the link_url, img_tag,
+ *         and img_url keys are arrays of those matches.
+ */
+function sacloud_webaccel_parse_images_from_html( $content ) {
+    $images = array();
+
+    if ( preg_match_all( '#(?:<a[^>]+?href=["|\'](?P<link_url>[^\s]+?)["|\'][^>]*?>\s*)?(?P<img_tag><img[^>]*?\s+?src=["|\'](?P<img_url>[^\s]+?)["|\'].*?>){1}(?:\s*</a>)?#is', $content, $images ) ) {
+        foreach ( $images as $key => $unused ) {
+            // Simplify the output as much as possible, mostly for confirming test results.
+            if ( is_numeric( $key ) && $key > 0 )
+                unset( $images[$key] );
+        }
+
+        return $images;
+    }
+
+    return array();
+}
+
+
 // ********** for cache mediafile by .htaccess ************
 
 function sacloud_webaccel_is_supported_app_server(){
@@ -1032,6 +1061,153 @@ function sacloud_webaccel_subdomain_url($wpurl) {
 
     $webaccelURL = $protocol . $subdomain . $path;
     return $webaccelURL;
+}
+
+/**
+ * Identify images in post content, and if images are local (uploaded to the current site), pass through WebAccelerator.
+ * Copied from JetPack[class.photon.php](https://jetpack.com)
+ *
+ * @param string $content
+ * @uses sacloud_webaccel_validate_image_url, jetpack_photon_url, esc_url
+ * @filter the_content
+ * @return string
+ */
+function sacloud_webaccel_filter_the_content( $content ) {
+    $images = sacloud_webaccel_parse_images_from_html( $content );
+
+    if ( ! empty( $images ) ) {
+        $upload_dir = wp_upload_dir();
+
+        foreach ( $images[0] as $index => $tag ) {
+
+            // Start with a clean attachment ID each time
+            $attachment_id = false;
+
+            // Identify image source
+            $src = $src_orig = $images['img_url'][ $index ];
+
+            // Support Automattic's Lazy Load plugin
+            // Can't modify $tag yet as we need unadulterated version later
+            if ( preg_match( '#data-lazy-src=["|\'](.+?)["|\']#i', $images['img_tag'][ $index ], $lazy_load_src ) ) {
+                $placeholder_src = $placeholder_src_orig = $src;
+                $src = $src_orig = $lazy_load_src[1];
+            } elseif ( preg_match( '#data-lazy-original=["|\'](.+?)["|\']#i', $images['img_tag'][ $index ], $lazy_load_src ) ) {
+                $placeholder_src = $placeholder_src_orig = $src;
+                $src = $src_orig = $lazy_load_src[1];
+            }
+
+            // Check if image URL should be used with WebAccelerator
+            if ( sacloud_webaccel_validate_image_url( $src ) ) {
+
+                // WP Attachment ID, if uploaded to this site
+                if (preg_match( '#class=["|\']?[^"\']*wp-image-([\d]+)[^"\']*["|\']?#i', $images['img_tag'][ $index ], $attachment_id )
+                    && (0 === strpos( $src, $upload_dir['baseurl']))){
+                    $attachment_id = intval( array_pop( $attachment_id ) );
+
+                    if ( $attachment_id ) {
+                        $attachment = get_post( $attachment_id );
+
+                        // Basic check on returned post object
+                        if ( is_object( $attachment ) && ! is_wp_error( $attachment ) && 'attachment' == $attachment->post_type ) {
+//                            $src_per_wp = wp_get_attachment_image_src( $attachment_id, 'full' );
+//
+//                            if ( sacloud_webaccel_validate_image_url( $src_per_wp[0] ) ) {
+//                                $src = $src_per_wp[0];
+//                            }
+                        } else {
+                            unset( $attachment_id );
+                            unset( $attachment );
+                            continue;
+                        }
+                    }
+                }else{
+                    continue;
+                }
+
+                $webaccel_url = sacloud_webaccel_subdomain_url($src);
+
+                // Modify image tag if Photon function provides a URL
+                // Ensure changes are only applied to the current image by copying and modifying the matched tag, then replacing the entire tag with our modified version.
+                if ( $src != $webaccel_url ) {
+                    $new_tag = $tag;
+
+
+                    // If present, replace the link href with a Photoned URL for the full-size image.
+                    if ( ! empty( $images['link_url'][ $index ] ) && sacloud_webaccel_validate_image_url( $images['link_url'][ $index ] ) ) {
+                        $new_tag = preg_replace('#(href=["|\'])' . $images['link_url'][$index] . '(["|\'])#i', '\1' . sacloud_webaccel_subdomain_url($images['link_url'][$index]) . '\2', $new_tag, 1);
+                    }
+
+                    $webaccel_url = esc_url( $webaccel_url );
+                    $new_tag = str_replace( $src_orig, $webaccel_url, $new_tag );
+
+                    // If Lazy Load is in use, pass placeholder image through Photon
+                    if ( isset( $placeholder_src ) && sacloud_webaccel_validate_image_url( $placeholder_src ) ) {
+                        $placeholder_src = sacloud_webaccel_subdomain_url( $placeholder_src );
+
+                        if ( $placeholder_src != $placeholder_src_orig )
+                            $new_tag = str_replace( $placeholder_src_orig, esc_url( $placeholder_src ), $new_tag );
+
+                        unset( $placeholder_src );
+                    }
+
+                    // Replace original tag with modified version
+                    $content = str_replace( $tag, $new_tag, $content );
+                }
+            }
+        }
+    }
+
+    return $content;
+}
+
+/**
+ * Ensure image URL is valid for WebAccelerator.
+ * Copied from JetPack[class.photon.php](https://jetpack.com)
+ *
+ * @param string $url
+ * @uses wp_parse_args
+ * @return bool
+ */
+function sacloud_webaccel_validate_image_url( $url ) {
+    $parsed_url = @parse_url( $url );
+
+
+    if ( ! $parsed_url )
+        return false;
+
+    // Parse URL and ensure needed keys exist, since the array returned by `parse_url` only includes the URL components it finds.
+    $url_info = wp_parse_args( $parsed_url, array(
+        'scheme' => null,
+        'host'   => null,
+        'port'   => null,
+        'path'   => null
+    ) );
+
+    // Bail if scheme isn't http or port is set that isn't port 80 or 443
+    if (
+        ! ( 'http' == $url_info['scheme'] &&  in_array( $url_info['port'], array( 80, null ) )  ) &&
+        ! ( 'https' == $url_info['scheme'] &&  in_array( $url_info['port'], array( 443, null ) )  )
+    ) {
+        return false;
+    }
+
+
+    // Bail if no host is found
+    if ( is_null( $url_info['host'] ) ) {
+        return false;
+    }
+
+    // Bail if the image alredy went through WebAccelerator
+    if ( preg_match( '#^[\w-]+.user.webaccel.jp$#i', $url_info['host'] ) ) {
+        return false;
+    }
+
+    // Bail if no path is found
+    if ( is_null( $url_info['path'] ) ) {
+        return false;
+    }
+
+    return true;
 }
 
 // Delete web-accel cache.
