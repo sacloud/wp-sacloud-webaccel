@@ -990,17 +990,19 @@ function sacloud_webaccel_cleanup_htaccess($htaccess){
 
 function sacloud_webaccel_send_cache_header(){
     $send_header = false;
-    if (!$send_header && sacloud_webaccel_get_option("enable-page") == "1"){
-        $send_header = is_front_page() || is_home();
-    }
-    if (!$send_header && sacloud_webaccel_get_option("enable-post") == "1"){
-        $send_header = !is_preview() && (is_single() || is_page() || is_404());
-    }
-    if (!$send_header && sacloud_webaccel_get_option("enable-media") == "1"){
-        $send_header = is_attachment(); //画像への直リンクは.htaccessで対応する
-    }
-    if (!$send_header && sacloud_webaccel_get_option("enable-archive") == "1"){
-        $send_header = is_archive();
+    if ( ! is_user_logged_in()) { // 前提:ログインユーザーのリクエストは全てキャッシュしない(画像以外)
+        if (!$send_header && sacloud_webaccel_get_option("enable-page") == "1") {
+            $send_header = is_front_page() || is_home();
+        }
+        if (!$send_header && sacloud_webaccel_get_option("enable-post") == "1") {
+            $send_header = !is_preview() && (is_single() || is_page() || is_404());
+        }
+        if (!$send_header && sacloud_webaccel_get_option("enable-media") == "1") {
+            $send_header = is_attachment(); //画像への直リンクは.htaccessで対応する
+        }
+        if (!$send_header && sacloud_webaccel_get_option("enable-archive") == "1") {
+            $send_header = is_archive();
+        }
     }
 
     if ($send_header){
