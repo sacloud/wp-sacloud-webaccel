@@ -310,9 +310,10 @@ function sacloud_webaccel_purge_post_on_edit($post_id, $post_after, $post_before
         $targetURLs[] = $after_permalink;
     }
 
-    // ===== archive(date) =====
+    // ===== archive =====
     if ( sacloud_webaccel_get_option('enable-archive') == '1' ) {
 
+        // ===== archive(date) =====
         foreach( array($post_before , $post_after) as $post) {
             $day = get_the_time('d', $post);
             $month = get_the_time('m', $post);
@@ -327,6 +328,13 @@ function sacloud_webaccel_purge_post_on_edit($post_id, $post_after, $post_before
                 }
             }
         }
+
+        // ===== archive(custom) =====
+        $archive_per_posttype = get_post_type_archive_link($post_after->post_type);
+        if($archive_per_posttype){
+            $targetURLs[] = $archive_per_posttype;
+        }
+
     }
 
     // ===== home(top) =====
@@ -399,9 +407,10 @@ function sacloud_webaccel_get_purge_url_by_post($post_id){
         $targetURLs[] = $permalink;
     }
 
-    // ===== archive(date) =====
+    // ===== archive =====
     if ( sacloud_webaccel_get_option('enable-archive') == '1' ) {
 
+        // ===== archive(date) =====
         $day = get_the_time('d', $post_id);
         $month = get_the_time('m', $post_id);
         $year = get_the_time('Y', $post_id);
@@ -413,6 +422,11 @@ function sacloud_webaccel_get_purge_url_by_post($post_id){
                 if ($day)
                     $targetURLs[] = get_day_link($year, $month, $day);
             }
+        }
+        // ===== archive(custom) =====
+        $archive_per_posttype = get_post_type_archive_link(get_post_type($post_id));
+        if($archive_per_posttype){
+            $targetURLs[] = $archive_per_posttype;
         }
     }
 
@@ -448,6 +462,8 @@ function sacloud_webaccel_purge_on_term_taxonomy_edited( $term_id , $taxon) {
 
         //object_idsのパージ(記事)
         $args = array(
+            'post_type' => 'any' ,
+            'post_status' => 'publish' ,
             'tax_query' => array(
                 array(
                     'taxonomy' => $taxon,
@@ -458,6 +474,7 @@ function sacloud_webaccel_purge_on_term_taxonomy_edited( $term_id , $taxon) {
         );
 
         $posts = get_posts($args);
+
         if (!empty($posts)) {
             foreach ($posts as $post) {
                 $targetURLs = array_merge($targetURLs, sacloud_webaccel_get_purge_url_by_post($post->ID));
