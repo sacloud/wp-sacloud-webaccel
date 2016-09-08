@@ -316,6 +316,7 @@ function sacloud_webaccel_purge_post_on_edit($post_id, $post_after, $post_before
             $targetURLs[] = $before_permalink;
         }
         $targetURLs[] = $after_permalink;
+        $targetURLs[] = sacloud_webaccel_get_homepage_url() . "comments/";
     }
 
     // ===== archive =====
@@ -417,6 +418,7 @@ function sacloud_webaccel_get_purge_url_by_post($post_id)
     if (sacloud_webaccel_get_option('enable-post') == '1') {
         $permalink = str_replace('__trashed', '', get_permalink($post_id));
         $targetURLs[] = $permalink;
+        $targetURLs[] = sacloud_webaccel_get_homepage_url() . "comments/";
     }
 
     // ===== archive =====
@@ -631,6 +633,7 @@ function sacloud_webaccel_true_purge_all()
 
     $targetURLs = array_filter(array_merge($targetURLs,
             array(sacloud_webaccel_get_homepage_url()),
+            array(sacloud_webaccel_get_homepage_url()."comments/"),
             sacloud_webaccel_get_all_posts_url(),       // posts
             sacloud_webaccel_get_all_taxonomies(),     // tag/category/taxonomy
             sacloud_webaccel_get_all_date_archives()    // date
@@ -1124,6 +1127,11 @@ function sacloud_webaccel_send_cache_header()
             //コメント送信者のリクエストの場合はキャッシュしない
             $commenter = wp_get_current_commenter();
             $send_header = !is_preview() && $commenter['comment_author_email'] === "" && (is_single() || is_page() || is_404());
+
+            // for comment feed (http(s)://host/wp/comments
+            if (!$send_header && is_feed()) {
+                $send_header = true;
+            }
         }
         if (!$send_header && sacloud_webaccel_get_option("enable-media") == "1") {
             $send_header = is_attachment(); //画像への直リンクは.htaccessで対応する
@@ -1131,9 +1139,9 @@ function sacloud_webaccel_send_cache_header()
         if (!$send_header && sacloud_webaccel_get_option("enable-archive") == "1") {
             $send_header = is_archive();
         }
+
+
     }
-
-
     if ($send_header) {
         $maxAge = sacloud_webaccel_get_option("maxage");
         if (strlen($maxAge) == 0) {
