@@ -1324,15 +1324,28 @@ class SacloudClient{
 
     public function DeleteCache($url){
         $data = array();
-        if (is_array($url)){
-            $data = array();
-            $splited_urls = array_chunk($url,100);
-            foreach($splited_urls as $chunk){
-                $data[] = array("URL" => $chunk);
-            }
-        }else{
-            $data = array(array("URL" => array($url)));
+        if (! is_array($url)){
+            $url = array($url);
         }
+
+        // add upper case URL for Japanese permlink
+        $toupper = create_function('$m', 'return strtoupper($m[0]);');
+        $dest = array();
+        foreach($url as $u){
+            $dest[] = $u;
+            $upper = preg_replace_callback('/(%[0-9a-f]{2}?)+/', $toupper, $u);
+            if ($u !== $upper){
+                $dest[] = $upper;
+            }
+        }
+
+        $url = $dest;
+        $data = array();
+        $splited_urls = array_chunk($url,100);
+        foreach($splited_urls as $chunk){
+            $data[] = array("URL" => $chunk);
+        }
+
 
         foreach($data as $d) {
             $apiURL = $this->getDeleteCacheURL();
