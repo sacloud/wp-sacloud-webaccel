@@ -25,6 +25,8 @@ function sacloud_webaccel_start()
     add_action('admin_init', 'sacloud_webaccel_options');
     add_action('wp_ajax_sacloud_webaccel_connect_test', 'sacloud_webaccel_connect_test');
 
+    add_filter('plugin_action_links_'.plugin_basename(__FILE__), 'sacloud_webaccel_add_action_links');
+
     if (sacloud_webaccel_auth()) {
         add_action('admin_bar_menu', 'sacloud_webaccel_toolbar_purge_item', 100);
 
@@ -91,6 +93,12 @@ function sacloud_webaccel_option_page()
     $sacloud_webaccel_options = sacloud_webaccel_get_options();
     $messages = array();
     include "tpl/setting.php";
+}
+
+function sacloud_webaccel_add_action_links($links){
+    $add_link = '<a href="options-general.php?page=wp-sacloud-webaccel/wp-sacloud-webaccel.php">'. __("Settings","wp-sacloud-webaccel").'</a>';
+    array_unshift( $links, $add_link);
+    return $links;
 }
 
 function sacloud_webaccel_toolbar_purge_item($admin_bar)
