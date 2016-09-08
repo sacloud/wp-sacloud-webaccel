@@ -565,6 +565,7 @@ function sacloud_webaccel_purge_url( $urls, $feed = true ) {
         }
 
         $targetURLs[] = $_url_purge;
+        $targetURLs[] = rtrim( $_url_purge_base, '/' );
 
         if ( $feed ) {
             $feed_url = rtrim( $_url_purge_base, '/' ) . '/feed/';
