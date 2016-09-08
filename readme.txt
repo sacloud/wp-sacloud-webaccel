@@ -3,8 +3,8 @@ Contributors: yamamotofebc
 Donate link:
 Tags: SakuraCloud, アクセラレータ, さくらのクラウド, さくらインターネット, 一方通行, CDN
 Requires at least: 4.5.3
-Tested up to: 4.6.0
-Stable tag: 0.0.1
+Tested up to: 4.6.1
+Stable tag: 0.0.2
 License: GPLv3 or later.
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -35,6 +35,8 @@ WordPressとさくらのクラウド ウェブアクセラレータを連携さ�
 
   メディアファイル以外はフィード(RSS/Atom/RDF)のキャッシュも行います。
 
+なお、ログインユーザーによるリクエスト、ページング2ページ目以降、検索結果ページはキャッシュを行いません。
+
 * WordPress管理画面でのデータ更新時、ウェブアクセラレータでのキャッシュをクリアします。
 
 * サブドメインを利用するように設定した場合、メディアファイルの配信URLをウェブアクセラレータが提供するサブドメインに書き換えを行います。
@@ -43,7 +45,7 @@ WordPressとさくらのクラウド ウェブアクセラレータを連携さ�
 
 = 使い方とサポート =
 
-[GitHub](https://github.com/yamamoto-febc/wp-sacloud-webaccel/tree/master/docs)では、プラグインのインストール方法や設定方法などを掲載しています。
+[GitHub](https://github.com/yamamoto-febc/wp-sacloud-webaccel/blob/master/docs/README.md)では、プラグインのインストール方法や設定方法などを掲載しています。
 
 == Installation ==
 
@@ -52,6 +54,8 @@ WordPressとさくらのクラウド ウェブアクセラレータを連携さ�
 ワードプレスのダッシュボード内の「プラグインメニュー」からプラグインを有効にします。
 
 ダッシュボードの『プラグイン新規追加』からの追加も可能です。
+
+インストール後の設定については[GitHub上のドキュメント「インストール/設定」](https://github.com/yamamoto-febc/wp-sacloud-webaccel/blob/master/docs/README.md)を参照してください。
 
 == Frequently Asked Questions ==
 
@@ -63,7 +67,7 @@ https://github.com/yamamoto-febc/wp-sacloud-webaccel
 
 == Changelog ==
 
-0.0.1 : 初回リリース
+0.0.2 : 初回リリース
 
 == Upgrade Notice ==
 
