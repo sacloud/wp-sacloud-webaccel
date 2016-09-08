@@ -1121,7 +1121,9 @@ function sacloud_webaccel_send_cache_header()
             $send_header = is_front_page() || is_home();
         }
         if (!$send_header && sacloud_webaccel_get_option("enable-post") == "1") {
-            $send_header = !is_preview() && (is_single() || is_page() || is_404());
+            //コメント送信者のリクエストの場合はキャッシュしない
+            $commenter = wp_get_current_commenter();
+            $send_header = !is_preview() && $commenter['comment_author_email'] === "" && (is_single() || is_page() || is_404());
         }
         if (!$send_header && sacloud_webaccel_get_option("enable-media") == "1") {
             $send_header = is_attachment(); //画像への直リンクは.htaccessで対応する
@@ -1130,6 +1132,7 @@ function sacloud_webaccel_send_cache_header()
             $send_header = is_archive();
         }
     }
+
 
     if ($send_header) {
         $maxAge = sacloud_webaccel_get_option("maxage");
