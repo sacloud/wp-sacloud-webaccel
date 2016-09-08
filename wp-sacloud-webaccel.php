@@ -612,11 +612,13 @@ function sacloud_webaccel_true_purge_all(){
     $targetURLs = array();
 
     $targetURLs = array_filter(array_merge($targetURLs ,
-        array(sacloud_webaccel_get_homepage_url()) ,
-        sacloud_webaccel_get_all_posts_url(),    // posts
-        sacloud_webaccel_get_all_taxonomies() ,  // tag/category/taxonomy
-        sacloud_webaccel_get_all_date_archives() // date
-    ));
+            array(sacloud_webaccel_get_homepage_url()) ,
+            sacloud_webaccel_get_all_attachments_url(), // attachment(with all sizes)
+            sacloud_webaccel_get_all_posts_url(),       // posts
+            sacloud_webaccel_get_all_taxonomies() ,     // tag/category/taxonomy
+            sacloud_webaccel_get_all_date_archives()    // date
+        )
+    );
 
     if (! empty($targetURLs)){
         sacloud_webaccel_purge_url(array_values(array_unique($targetURLs)));
@@ -625,6 +627,51 @@ function sacloud_webaccel_true_purge_all(){
     sacloud_webaccel_log( __( "Finish purge_all", "wp-sacloud-webaccel" ) );
 
     return true;
+
+}
+
+function sacloud_webaccel_get_all_attachments_url(){
+    $targetURLs = array();
+    $args = array(
+        'numberposts' => 0,
+        'post_type' => 'attachment',
+        'posts_per_page' => -1,
+        'post_parent' => null,
+        'post_status' => 'any' );
+
+    if ( $_posts = get_posts( $args ) ) {
+
+        foreach ( $_posts as $p ) {
+
+            $url = get_attachment_link($p->ID);
+            if($url){
+                $targetURLs[] = $url;
+            }
+
+            $url = wp_get_attachment_url($p->ID);
+            if ($url) {
+                $parsed = parse_url($url);
+                $protocol_host = str_replace($parsed['path'] , '' , $url);
+                $file_url_dir = dirname( $parsed['path']) . DIRECTORY_SEPARATOR;
+                $file_name = rawurlencode(str_replace($file_url_dir , '' , $parsed['path']));
+                $url    = $protocol_host . $file_url_dir . $file_name;
+
+                $targetURLs[] = $url;
+
+                //画像の場合は全サイズURLも対応
+                $metadatas = wp_get_attachment_metadata($p->ID);
+                if( isset($metadatas['sizes'])) {
+                    foreach($metadatas['sizes'] as $thumb) {
+                        $url = $protocol_host . $file_url_dir . rawurlencode($thumb['file']);
+                        $targetURLs[] = $url;
+                    }
+                }
+
+            }
+        }
+    }
+
+    return $targetURLs;
 
 }
 
@@ -1235,8 +1282,35 @@ function sacloud_webaccel_validate_image_url( $url ) {
 // Delete web-accel cache.
 function sacloud_webaccel_delete_cache_by_id($file_id) {
 
-    $url =  wp_get_attachment_url($file_id);
-    return sacloud_webaccel_delete_cache($url);
+    $targetURLs = array();
+    $url = get_attachment_link($file_id);
+    if($url){
+        $targetURLs[] = $url;
+    }
+
+    $url = wp_get_attachment_url($file_id);
+    if ($url) {
+        $parsed = parse_url($url);
+        $protocol_host = str_replace($parsed['path'] , '' , $url);
+        $file_url_dir = dirname( $parsed['path']) . DIRECTORY_SEPARATOR;
+        $file_name = rawurlencode(str_replace($file_url_dir , '' , $parsed['path']));
+        $url    = $protocol_host . $file_url_dir . $file_name;
+
+        $targetURLs[] = $url;
+
+        //画像の場合は全サイズURLも対応
+        $metadatas = wp_get_attachment_metadata($file_id);
+        if( isset($metadatas['sizes'])) {
+            foreach($metadatas['sizes'] as $thumb) {
+                $url = $protocol_host . $file_url_dir . rawurlencode($thumb['file']);
+                $targetURLs[] = $url;
+            }
+        }
+
+    }
+
+
+    return sacloud_webaccel_delete_cache($targetURLs);
 }
 
 // Delete web-accel cache
