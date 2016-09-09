@@ -251,7 +251,7 @@ function sacloud_webaccel_validate_options($values)
     }
 
     //
-    if ($out['use-subdomain'] === 1 && strlen($out['subdomain-name']) === 0) {
+    if ($out['use-subdomain'] === '1' && strlen($out['subdomain-name']) === 0) {
         add_settings_error(
             'sacloud-webaccel-options',
             'subdomain-name',
