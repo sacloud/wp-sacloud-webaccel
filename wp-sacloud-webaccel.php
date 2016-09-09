@@ -7,7 +7,7 @@
  * Author: Kazumichi Yamamoto
  * Author URI: https://github.com/yamamoto-febc
  * Text Domain: wp-sacloud-webaccel
- * Version: 0.0.1
+ * Version: 0.0.2
  * License: GPLv3
  */
 
