@@ -2,16 +2,27 @@
 
 ![eye-catch.jpg](docs/images/eye-catch.jpg)
 
-[さくらのクラウド ウェブアクセラレータ](http://cloud.sakura.ad.jp/specification/option/#option-content05)との連携を行います。
+WordPressと[さくらのクラウド ウェブアクセラレータ](http://cloud.sakura.ad.jp/specification/option/#option-content05)との連携を行うためのプラグインです。
 
-ウェブアクセラレータを利用することにより、オリジンサーバーへの負荷を最小限にしつつ、アクセス急増時でも安定してサイトを表示することができます。
+ウェブアクセラレータを利用すると、オリジンサーバーへの負荷を最小限にしつつ、
+アクセス急増時でも安定してサイトを表示することができます。
 
-このプラグインを利用することで、ウェブアクセラレータとの連携に必要なレスポンスヘッダの出力や、データ更新時のキャッシュクリアなどが自動化されます。
+このプラグインを利用することで、煩雑な設定を行うことなくウェブアクセラレータが利用できるようになります。
 
-[サブドメイン方式](http://cloud-news.sakura.ad.jp/webaccel/manual02/)での連携にも対応しており、
-メディアファイルのURLのみをウェブアクセラレータのサブドメインURLに書き換えることができます。
+**注意:現在はβテスト中です。運用環境への適用の際は事前に十分な検証を行ってください。**
 
-**注意:現在開発中です。テスト環境でのみご利用ください。**
+
+## 主な機能/特徴
+
+以下のような機能を持っています。
+詳細は[[このプラグインについて]](docs/About.md)を参照ください。
+
+- `Cache-Control`レスポンスヘッダの出力
+- APIでのキャッシュ自動削除
+- メディアファイルのURL動的書き替え
+- 小さなフットプリント
+- WP-CLIのサポート
+
 
 ## スクリーンショット
 
@@ -21,25 +32,14 @@
 ## インストール
 
 WordPressの管理ページからインストール可能です。
-詳細は[インストール/設定](docs/README.md)を参照してください。
 
-## インストール(手動)
+インストールの詳細は[[インストール / Installation]](docs/Installation.md)などを参照してください。
 
-手動でインストールする場合は次のようにしてください。
+## 設定/その他ドキュメントなど
 
-1. 以下のコマンドを実行してください。
-2. 管理画面の「プラグイン」メニューから有効化してください。
+ドキュメントはこちらから参照ください。
 
-```bash
-
-# Move into WordPress root
-cd [WORDPRESS_ROOT]/wp-content/plugins
-
-# Clone plugin repository
-git clone https://github.com/yamamoto-febc/wp-sacloud-webaccel
-cd wp-sacloud-webaccel
-
-```
+[[wp-sacloud-webaccelドキュメント]](docs/README.md)
 
 # License
 
