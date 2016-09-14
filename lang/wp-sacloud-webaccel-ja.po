@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2016-09-14 20:33+0900\n"
-"PO-Revision-Date: 2016-09-14 20:34+0900\n"
+"POT-Creation-Date: 2016-09-14 20:38+0900\n"
+"PO-Revision-Date: 2016-09-14 20:39+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -148,6 +148,12 @@ msgid "Need to set `WP_DEBUG`"
 msgstr "`WP_DEBUG`を設定する必要があります"
 
 #: wp-cli.php:26
+msgid "API Token Authentication error"
+msgstr ""
+"APIトークンでの認証に失敗しました。管理画面からAPIトークンの設定を修正してく"
+"ださい。"
+
+#: wp-cli.php:31
 msgid "Purged Everything!"
 msgstr "キャッシュを全件削除しました"
 
