@@ -71,8 +71,8 @@ function sacloud_webaccel_start()
 
         // add HTTP header
         add_action('wp', 'sacloud_webaccel_send_cache_header');
-
-
+    }else {
+        add_action('admin_notices', 'sacloud_webaccel_show_incomplete_setting_notice');
     }
     // write .htaccess for Mediafile
     add_action('add_option_sacloud-webaccel-options', 'sacloud_webaccel_options_handle_add', 10, 2);
@@ -80,6 +80,11 @@ function sacloud_webaccel_start()
     add_action('delete_option_sacloud-webaccel-options', 'sacloud_webaccel_options_handle_delete');
 
 
+}
+
+function sacloud_webaccel_show_incomplete_setting_notice()
+{
+    echo '<div class="message notice notice-error"><p>' . __('WebAccelerator settings is incompleted', 'wp-sacloud-webaccel') . '<a href="options-general.php?page=wp-sacloud-webaccel/wp-sacloud-webaccel.php">[' . __("Settings", "wp-sacloud-webaccel") . ']</a></p></div>';
 }
 
 function sacloud_webaccel_add_pages()

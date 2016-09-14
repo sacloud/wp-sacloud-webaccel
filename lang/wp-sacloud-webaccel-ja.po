@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
-"POT-Creation-Date: 2016-09-08 23:03+0900\n"
-"PO-Revision-Date: 2016-09-08 23:03+0900\n"
+"POT-Creation-Date: 2016-09-14 20:33+0900\n"
+"PO-Revision-Date: 2016-09-14 20:34+0900\n"
 "Last-Translator: \n"
 "Language-Team: \n"
 "Language: ja\n"
@@ -16,6 +16,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: lang\n"
 "X-Poedit-SearchPath-1: tpl\n"
 "X-Poedit-SearchPath-2: wp-sacloud-webaccel.php\n"
+"X-Poedit-SearchPath-3: wp-cli.php\n"
 
 #: tpl/setting.php:10
 msgid "Setting SakuraCloud WebAccelerator"
@@ -146,80 +147,88 @@ msgstr "デバッグログを出力する"
 msgid "Need to set `WP_DEBUG`"
 msgstr "`WP_DEBUG`を設定する必要があります"
 
-#: wp-sacloud-webaccel.php:85
-msgid "WebAccelerator"
-msgstr "ウェブアクセラレータ"
+#: wp-cli.php:26
+msgid "Purged Everything!"
+msgstr "キャッシュを全件削除しました"
 
-#: wp-sacloud-webaccel.php:99
+#: wp-sacloud-webaccel.php:87
+msgid "WebAccelerator settings is incompleted"
+msgstr "ウェブアクセラレータの設定が完了していません。"
+
+#: wp-sacloud-webaccel.php:87 wp-sacloud-webaccel.php:106
 msgid "Settings"
 msgstr "設定"
 
-#: wp-sacloud-webaccel.php:114 wp-sacloud-webaccel.php:117
+#: wp-sacloud-webaccel.php:92
+msgid "WebAccelerator"
+msgstr "ウェブアクセラレータ"
+
+#: wp-sacloud-webaccel.php:121 wp-sacloud-webaccel.php:124
 msgid "Purge Cache"
 msgstr "キャッシュ削除"
 
-#: wp-sacloud-webaccel.php:118
+#: wp-sacloud-webaccel.php:125
 msgid "Are you sure you want to delete the WebAccelerator cache?"
 msgstr "ウェブアクセラレータのキャッシュを削除します。よろしいですか？"
 
-#: wp-sacloud-webaccel.php:171 wp-sacloud-webaccel.php:177
+#: wp-sacloud-webaccel.php:178 wp-sacloud-webaccel.php:184
 #, php-format
 msgid "%s is required."
 msgstr "%s を入力してください"
 
-#: wp-sacloud-webaccel.php:171 wp-sacloud-webaccel.php:195
+#: wp-sacloud-webaccel.php:178 wp-sacloud-webaccel.php:202
 msgid "api-key"
 msgstr "アクセストークン"
 
-#: wp-sacloud-webaccel.php:177 wp-sacloud-webaccel.php:208
+#: wp-sacloud-webaccel.php:184 wp-sacloud-webaccel.php:215
 msgid "api-secret"
 msgstr "アクセスシークレット"
 
-#: wp-sacloud-webaccel.php:195 wp-sacloud-webaccel.php:208
-#: wp-sacloud-webaccel.php:220
+#: wp-sacloud-webaccel.php:202 wp-sacloud-webaccel.php:215
+#: wp-sacloud-webaccel.php:227
 #, php-format
 msgid "%s is too long."
 msgstr "%s が長すぎます。"
 
-#: wp-sacloud-webaccel.php:220
+#: wp-sacloud-webaccel.php:227
 msgid "subdomain-name"
 msgstr "サブドメイン名"
 
-#: wp-sacloud-webaccel.php:232
+#: wp-sacloud-webaccel.php:239
 #, php-format
 msgid "%s is allowed number only."
 msgstr "%s は数値を入力してください"
 
-#: wp-sacloud-webaccel.php:232 wp-sacloud-webaccel.php:239
+#: wp-sacloud-webaccel.php:239 wp-sacloud-webaccel.php:246
 msgid "maxage"
 msgstr "キャッシュ秒数"
 
-#: wp-sacloud-webaccel.php:239
+#: wp-sacloud-webaccel.php:246
 #, php-format
 msgid "%s is neet between %d and %d."
 msgstr "%s は %d から%d の範囲で入力してください"
 
-#: wp-sacloud-webaccel.php:258
+#: wp-sacloud-webaccel.php:265
 msgid "subdomina-name is required when use-subdomain"
 msgstr "サブドメインを利用する場合、サブドメイン名の入力は必須です"
 
-#: wp-sacloud-webaccel.php:638
+#: wp-sacloud-webaccel.php:663
 msgid "Start purge_all"
 msgstr "アクセラレータキャッシュ削除 開始"
 
-#: wp-sacloud-webaccel.php:661
+#: wp-sacloud-webaccel.php:686
 msgid "Finish purge_all"
 msgstr "アクセラレータキャッシュ削除 終了"
 
-#: wp-sacloud-webaccel.php:871
+#: wp-sacloud-webaccel.php:896
 msgid "Purge initiated"
 msgstr "アクセラレータキャッシュを削除しました"
 
-#: wp-sacloud-webaccel.php:896
+#: wp-sacloud-webaccel.php:921
 msgid "Connection was Successfully"
 msgstr "接続に成功しました。"
 
-#: wp-sacloud-webaccel.php:903
+#: wp-sacloud-webaccel.php:928
 msgid "Connection Error"
 msgstr "接続に失敗しました。"
 
