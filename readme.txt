@@ -4,7 +4,7 @@ Donate link:
 Tags: SakuraCloud, アクセラレータ, さくらのクラウド, さくらインターネット, 一方通行, CDN
 Requires at least: 4.5.3
 Tested up to: 4.6.1
-Stable tag: 0.0.2
+Stable tag: 0.0.3
 License: GPLv3 or later.
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -67,7 +67,9 @@ https://github.com/yamamoto-febc/wp-sacloud-webaccel
 
 == Changelog ==
 
-0.0.2 : 初回リリース
+0.0.3 : [WordPress管理画面での画像編集への対応など](https://github.com/yamamoto-febc/wp-sacloud-webaccel/releases/tag/v0.0.3)
+
+0.0.2 : [初回リリース](https://github.com/yamamoto-febc/wp-sacloud-webaccel/releases/tag/v0.0.2)
 
 == Upgrade Notice ==
 
