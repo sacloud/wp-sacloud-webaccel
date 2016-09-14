@@ -62,11 +62,6 @@ function sacloud_webaccel_start()
         // expose action to allow other plugins to purge the cache
         add_action('sacloud_webaccel_purge_all', 'sacloud_webaccel_true_purge_all');
 
-        // Load WP-CLI command
-        if (defined('WP_CLI') && WP_CLI) {
-            require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'wp-cli.php';
-            \WP_CLI::add_command('sacloud-webaccel', 'Sacloud_WebAccel_WP_CLI_Command');
-        }
         // ------------ for Public --------
 
         // add HTTP header
@@ -74,6 +69,13 @@ function sacloud_webaccel_start()
     }else {
         add_action('admin_notices', 'sacloud_webaccel_show_incomplete_setting_notice');
     }
+
+    // Load WP-CLI command
+    if (defined('WP_CLI') && WP_CLI) {
+        require_once dirname(__FILE__) . DIRECTORY_SEPARATOR . 'wp-cli.php';
+        \WP_CLI::add_command('sacloud-webaccel', 'Sacloud_WebAccel_WP_CLI_Command');
+    }
+
     // write .htaccess for Mediafile
     add_action('add_option_sacloud-webaccel-options', 'sacloud_webaccel_options_handle_add', 10, 2);
     add_action('update_option_sacloud-webaccel-options', 'sacloud_webaccel_options_handle_update', 10, 2);
@@ -963,7 +965,7 @@ function sacloud_webaccel_get_option($key, $force = false)
 // Logging
 function sacloud_webaccel_log($msg)
 {
-
+    do_action("sacloud_webaccel_log" , $msg);
     if (!WP_DEBUG || sacloud_webaccel_get_option('enable-log') != 1) {
         return;
     }
@@ -1509,6 +1511,8 @@ class SacloudClient
                 $dest[] = $upper;
             }
         }
+
+        do_action("sacloud_webaccel_call_purge_api" , $dest);
 
         $url = $dest;
         $data = array();
