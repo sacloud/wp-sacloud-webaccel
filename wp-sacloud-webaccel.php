@@ -27,7 +27,7 @@ function sacloud_webaccel_start()
     add_action('admin_init', 'sacloud_webaccel_options');
     add_action('wp_ajax_sacloud_webaccel_connect_test', 'sacloud_webaccel_connect_test');
 
-    add_filter('plugin_action_links_'.plugin_basename(__FILE__), 'sacloud_webaccel_add_action_links');
+    add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'sacloud_webaccel_add_action_links');
 
     if (sacloud_webaccel_auth()) {
         add_action('admin_bar_menu', 'sacloud_webaccel_toolbar_purge_item', 100);
@@ -40,7 +40,7 @@ function sacloud_webaccel_start()
         add_action('add_attachment', 'sacloud_webaccel_delete_cache_by_id');
         add_action('edit_attachment', 'sacloud_webaccel_delete_cache_by_id');
         add_action('delete_attachment', 'sacloud_webaccel_delete_cache_by_id');
-        add_filter('wp_delete_file', 'sacloud_webaccel_delete_cache_by_path');
+        
         add_filter('wp_update_attachment_metadata', 'sacloud_webaccel_thumb_upload');
 
         // post + page
@@ -66,7 +66,7 @@ function sacloud_webaccel_start()
 
         // add HTTP header
         add_action('wp', 'sacloud_webaccel_send_cache_header');
-    }else {
+    } else {
         add_action('admin_notices', 'sacloud_webaccel_show_incomplete_setting_notice');
     }
 
@@ -104,9 +104,10 @@ function sacloud_webaccel_option_page()
     include "tpl/setting.php";
 }
 
-function sacloud_webaccel_add_action_links($links){
-    $add_link = '<a href="options-general.php?page=wp-sacloud-webaccel/wp-sacloud-webaccel.php">'. __("Settings","wp-sacloud-webaccel").'</a>';
-    array_unshift( $links, $add_link);
+function sacloud_webaccel_add_action_links($links)
+{
+    $add_link = '<a href="options-general.php?page=wp-sacloud-webaccel/wp-sacloud-webaccel.php">' . __("Settings", "wp-sacloud-webaccel") . '</a>';
+    array_unshift($links, $add_link);
     return $links;
 }
 
@@ -274,7 +275,8 @@ function sacloud_webaccel_validate_options($values)
 }
 
 
-function sacloud_webaccel_activate(){
+function sacloud_webaccel_activate()
+{
     sacloud_webaccel_handle_htaccess_file();
 }
 
@@ -292,7 +294,8 @@ function sacloud_webaccel_deactivate()
     }
 }
 
-function sacloud_webaccel_uninstall(){
+function sacloud_webaccel_uninstall()
+{
     delete_option("sacloud-webaccel-options");
 
     $upload_dir = wp_upload_dir();
@@ -668,7 +671,7 @@ function sacloud_webaccel_true_purge_all()
 
     $targetURLs = array_filter(array_merge($targetURLs,
             array(sacloud_webaccel_get_homepage_url()),
-            array(sacloud_webaccel_get_homepage_url()."comments/"),
+            array(sacloud_webaccel_get_homepage_url() . "comments/"),
             sacloud_webaccel_get_all_posts_url(),       // posts
             sacloud_webaccel_get_all_taxonomies(),     // tag/category/taxonomy
             sacloud_webaccel_get_all_date_archives()    // date
@@ -965,7 +968,7 @@ function sacloud_webaccel_get_option($key, $force = false)
 // Logging
 function sacloud_webaccel_log($msg)
 {
-    do_action("sacloud_webaccel_log" , $msg);
+    do_action("sacloud_webaccel_log", $msg);
     if (!WP_DEBUG || sacloud_webaccel_get_option('enable-log') != 1) {
         return;
     }
@@ -1393,23 +1396,24 @@ function sacloud_webaccel_delete_cache_by_id($file_id)
             }
         }
 
+        //画像編集-過去分があればパージ
+        $backup_metadatas = get_post_meta($file_id, "_wp_attachment_backup_sizes", false);
+        if (!empty($backup_metadatas)) {
+            foreach ($backup_metadatas as $meta) {
+                foreach ($meta as $thumb) {
+                    $targetURLs[]  = $protocol_host . $file_url_dir . rawurlencode($thumb['file']);
+                }
+            }
+        }
+
     }
 
 
     return sacloud_webaccel_delete_cache($targetURLs);
 }
 
-// Delete web-accel cache
-function sacloud_webaccel_delete_cache_by_path($path)
-{
-    $dir = wp_upload_dir();
-    $filePath = str_replace($dir['basedir'] . DIRECTORY_SEPARATOR, '', $path);
-    sacloud_webaccel_delete_cache($dir['baseurl'] . "/" . $filePath);
-    return $path;
-}
-
 // Upload thumbnails
-function sacloud_webaccel_thumb_upload($metadatas)
+function sacloud_webaccel_thumb_upload($metadatas, $file_id)
 {
     if (!isset($metadatas['sizes'])) {
         return $metadatas;
@@ -1426,12 +1430,6 @@ function sacloud_webaccel_thumb_upload($metadatas)
     }
 
     return $metadatas;
-}
-
-// Delete an object
-function sacloud_webaccel_delete_object($filepath)
-{
-    return __delete_object($filepath);
 }
 
 function createApiClient($key = null, $secret = null, $zone = null, $force = false)
@@ -1512,7 +1510,7 @@ class SacloudClient
             }
         }
 
-        do_action("sacloud_webaccel_call_purge_api" , $dest);
+        do_action("sacloud_webaccel_call_purge_api", $dest);
 
         $url = $dest;
         $data = array();
