@@ -30,8 +30,5 @@ var sacloudojs_connect_test = function($){return function() {
 (function($) {
     $(function () {
         $("#sacloud-webaccel-flash").hide();
-
-        $("#sacloud-webaccel-use-subdomain").on("change" , function(){
-        });
     });
 })(jQuery);

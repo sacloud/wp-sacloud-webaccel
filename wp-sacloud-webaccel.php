@@ -12,7 +12,9 @@
  */
 
 // -------------------- Register boot functions ---------------------
+register_activation_hook(__FILE__, 'sacloud_webaccel_activate');
 register_deactivation_hook(__FILE__, 'sacloud_webaccel_deactivate');
+register_uninstall_hook(__FILE__, 'sacloud_webaccel_uninstall');
 add_action('init', 'sacloud_webaccel_start');
 // ------------------------------------------------------------------
 function sacloud_webaccel_start()
@@ -264,8 +266,26 @@ function sacloud_webaccel_validate_options($values)
     return $out;
 }
 
+
+function sacloud_webaccel_activate(){
+    sacloud_webaccel_handle_htaccess_file();
+}
+
 function sacloud_webaccel_deactivate()
 {
+    $upload_dir = wp_upload_dir();
+    if (!wp_mkdir_p($upload_dir['basedir'])) {
+        return -1;
+    }
+    $htaccess = $upload_dir['basedir'] . DIRECTORY_SEPARATOR . '.htaccess';
+
+    //clean up old rules first
+    if (sacloud_webaccel_cleanup_htaccess($htaccess) == -1) {
+        return -1; //unable to write to the file
+    }
+}
+
+function sacloud_webaccel_uninstall(){
     delete_option("sacloud-webaccel-options");
 
     $upload_dir = wp_upload_dir();
