@@ -1,7 +1,7 @@
 <?php
 
 /**
- * Plugin Name: SakuraCloud Web Accelerator Plugin
+ * Plugin Name: wp-sacloud-webaccel
  * Plugin URI: https://github.com/yamamoto-febc/wp-sacloud-webaccel
  * Description: WordPressとさくらのクラウド ウェブアクセラレータを連携させるためのプラグイン
  * Author: Kazumichi Yamamoto
