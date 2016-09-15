@@ -35,12 +35,13 @@ function sacloud_webaccel_start()
         // for media(attachment)
         if (sacloud_webaccel_get_option("use-subdomain") == 1) {
             //add_filter('wp_get_attachment_url', 'sacloud_webaccel_subdomain_url');
+            add_filter('wp_calculate_image_srcset', 'sacloud_webaccel_calculate_image_srcset', 10, 5);
             add_filter('the_content', 'sacloud_webaccel_filter_the_content', 888888);
         }
         add_action('add_attachment', 'sacloud_webaccel_delete_cache_by_id');
         add_action('edit_attachment', 'sacloud_webaccel_delete_cache_by_id');
         add_action('delete_attachment', 'sacloud_webaccel_delete_cache_by_id');
-        
+
         add_filter('wp_update_attachment_metadata', 'sacloud_webaccel_thumb_upload');
 
         // post + page
@@ -1212,6 +1213,27 @@ function sacloud_webaccel_subdomain_url($wpurl)
     return $webaccelURL;
 }
 
+// Return object URL(srcset)
+function sacloud_webaccel_calculate_image_srcset($sources, $size_array, $image_src, $image_meta, $attachment_id)
+{
+    $isSubdomain = sacloud_webaccel_get_option('use-subdomain') === '1';
+    if (!$isSubdomain) {
+        return $sources;
+    }
+
+    $homeURL = home_url();
+    $protocol = sacloud_webaccel_get_option('subdomain-ssl') == '1' ? "https://" : "http://";
+    $subdomain = sacloud_webaccel_get_option('subdomain-name') . ".user.webaccel.jp";
+
+    foreach ($sources as &$src) {
+        $url = $src['url'];
+
+        $path = str_replace($homeURL, '', $url);
+        $src['url'] = $protocol . $subdomain . $path;
+    }
+    return $sources;
+}
+
 /**
  * Identify images in post content, and if images are local (uploaded to the current site), pass through WebAccelerator.
  * Copied from JetPack[class.photon.php](https://jetpack.com)
@@ -1401,7 +1423,7 @@ function sacloud_webaccel_delete_cache_by_id($file_id)
         if (!empty($backup_metadatas)) {
             foreach ($backup_metadatas as $meta) {
                 foreach ($meta as $thumb) {
-                    $targetURLs[]  = $protocol_host . $file_url_dir . rawurlencode($thumb['file']);
+                    $targetURLs[] = $protocol_host . $file_url_dir . rawurlencode($thumb['file']);
                 }
             }
         }
