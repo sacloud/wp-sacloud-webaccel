@@ -8,7 +8,7 @@
 </div>
 
 <h2><?php _e('Setting SakuraCloud WebAccelerator', "wp-sacloud-webaccel"); ?></h2>
-<p><?php _e("Please Input the API tokens for the SakuraCloud. No account? Let's ", 'wp-sacloud-webaccel'); ?><a href="<?php _e('https://secure.sakura.ad.jp/member-regist/input', 'wp-sacloud-webaccel'); ?>" target="_blank" ><?php _e('signup', 'wp-sacloud-webaccel'); ?></a></p>
+<p><?php _e("Please Input the API tokens for the SakuraCloud. No account? Let's ", 'wp-sacloud-webaccel'); ?><a href="<?php _e('https://secure.sakura.ad.jp/signup3/member-register/input.html', 'wp-sacloud-webaccel'); ?>" target="_blank" ><?php _e('signup', 'wp-sacloud-webaccel'); ?></a></p>
 
 <form method="post" action="options.php">
 		<?php settings_fields('sacloud-webaccel-options'); ?>
