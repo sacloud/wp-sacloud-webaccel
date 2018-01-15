@@ -7,7 +7,7 @@
  * Author: Kazumichi Yamamoto
  * Author URI: https://github.com/yamamoto-febc
  * Text Domain: wp-sacloud-webaccel
- * Version: 0.0.5
+ * Version: 0.0.6
  * License: GPLv3
  */
 
@@ -668,26 +668,17 @@ function sacloud_webaccel_true_purge_all()
 {
     sacloud_webaccel_log(__("Start purge_all", "wp-sacloud-webaccel"));
 
-    $targetURLs = array();
-
-    $targetURLs = array_filter(array_merge($targetURLs,
-            array(sacloud_webaccel_get_homepage_url()),
-            array(sacloud_webaccel_get_homepage_url() . "comments/"),
-            sacloud_webaccel_get_all_posts_url(),       // posts
-            sacloud_webaccel_get_all_taxonomies(),     // tag/category/taxonomy
-            sacloud_webaccel_get_all_date_archives()    // date
-        )
-    );
-
-    if (!empty($targetURLs)) {
-        sacloud_webaccel_purge_url(array_values(array_unique($targetURLs)));
+    $parse = parse_url(sacloud_webaccel_get_homepage_url());
+    // サブドメインの場合、http[s]://[your-host].user.webaccel.jpにする
+    $domain = $parse['host'];
+    $isSubdomain = sacloud_webaccel_get_option('use-subdomain') == '1';
+    if ($isSubdomain) {
+        $domain= sacloud_webaccel_get_option('subdomain-name') . ".user.webaccel.jp";
     }
 
-    $targetURLs = sacloud_webaccel_get_all_attachments_url();
-    if (!empty($targetURLs)) {
-        sacloud_webaccel_purge_url(array_values(array_unique($targetURLs)), false, false);
+    if (!empty($domain)) {
+        sacloud_webaccel_delete_cache_all($domain);
     }
-
 
     sacloud_webaccel_log(__("Finish purge_all", "wp-sacloud-webaccel"));
 
@@ -1435,7 +1426,7 @@ function sacloud_webaccel_delete_cache_by_id($file_id)
 }
 
 // Upload thumbnails
-function sacloud_webaccel_thumb_upload($metadatas, $file_id)
+function sacloud_webaccel_thumb_upload($metadatas)
 {
     if (!isset($metadatas['sizes'])) {
         return $metadatas;
@@ -1481,6 +1472,12 @@ function sacloud_webaccel_delete_cache($url)
     return true;
 }
 
+function sacloud_webaccel_delete_cache_all($domain) {
+    $client = createApiClient();
+    $client->DeleteCacheAll($domain);
+    return true;
+}
+
 class SacloudClient
 {
     private $apiKey = '';
@@ -1522,7 +1519,9 @@ class SacloudClient
         }
 
         // add upper case URL for Japanese permlink
-        $toupper = create_function('$m', 'return strtoupper($m[0]);');
+        $toupper = function($m) {
+            return strtoupper($m[0]);
+        };
         $dest = array();
         foreach ($url as $u) {
             $dest[] = $u;
@@ -1547,14 +1546,28 @@ class SacloudClient
             $res = $this->Post($apiURL, $d);
 
             if (!$res) {
-                throw new Exception("AuthError : Unknown error");
+                throw new Exception("Error : Unknown error");
             } elseif (isset($res['is_fatal']) && $res['is_fatal'] === true) {
-                throw new Exception("AuthError : " . $res['error_msg']);
+                throw new Exception("Error : " . $res['error_msg']);
             }
             sacloud_webaccel_log(sprintf("Posted delete cache request to [%s]", print_r($d, true)));
         }
         return true;
 
+    }
+
+    public function DeleteCacheAll($domain) {
+        $apiURL = $this->getDeleteCacheAllURL();
+        $data = array("Site" => array("Domain" => $domain));
+        $res = $this->Post($apiURL, $data);
+
+        if (!$res) {
+            throw new Exception("Error : Unknown error");
+        } elseif (isset($res['is_fatal']) && $res['is_fatal'] === true) {
+            throw new Exception("Error : " . $res['error_msg']);
+        }
+        sacloud_webaccel_log(sprintf("Posted delete all cache request to [%s]", print_r($data, true)));
+        return true;
     }
 
     private function getAPIAuthURL()
@@ -1565,6 +1578,11 @@ class SacloudClient
     private function getDeleteCacheURL()
     {
         return sprintf(self::API_BASE_URL_FORAMT, $this->zone, self::API_WEBACCEL_SUFFIX) . "deletecache";
+    }
+
+    private function getDeleteCacheAllURL()
+    {
+        return sprintf(self::API_BASE_URL_FORAMT, $this->zone, self::API_WEBACCEL_SUFFIX) . "deleteallcache";
     }
 
     private function getRequestArgs()

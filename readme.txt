@@ -3,8 +3,8 @@ Contributors: yamamotofebc
 Donate link:
 Tags: SakuraCloud, アクセラレータ, さくらのクラウド, さくらインターネット, 一方通行, CDN
 Requires at least: 4.5.3
-Tested up to: 4.8.1
-Stable tag: 0.0.5
+Tested up to: 4.9.1
+Stable tag: 0.0.6
 License: GPLv3 or later.
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -66,6 +66,8 @@ https://github.com/yamamoto-febc/wp-sacloud-webaccel
 1. screenshot-1.png
 
 == Changelog ==
+
+0.0.6 : [キャッシュ全削除APIを利用](https://github.com/yamamoto-febc/wp-sacloud-webaccel/releases/tag/v0.0.6)
 
 0.0.4 : [サブドメイン型でのURL書き換えにてsrcset属性の書き換えに対応](https://github.com/yamamoto-febc/wp-sacloud-webaccel/releases/tag/v0.0.4)
 
