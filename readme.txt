@@ -12,13 +12,13 @@ WordPressとさくらのクラウド ウェブアクセラレータを連携さ�
 
 == Description ==
 
-[さくらのクラウド ウェブアクセラレータ](http://cloud.sakura.ad.jp/specification/option/#option-content05)との連携を行います。
+[さくらのクラウド ウェブアクセラレータ](https://cloud.sakura.ad.jp/specification/web-accelerator/)との連携を行います。
 
 ウェブアクセラレータを利用することにより、オリジンサーバーへの負荷を最小限にしつつ、アクセス急増時でも安定してサイトを表示することができます。
 
 このプラグインを利用することで、ウェブアクセラレータとの連携に必要なレスポンスヘッダの出力や、データ更新時のキャッシュクリアなどが自動化されます。
 
-[サブドメイン方式](http://cloud-news.sakura.ad.jp/webaccel/manual02/)での連携にも対応しており、
+[サブドメイン方式](https://manual.sakura.ad.jp/cloud/webaccel/manual/settings-subdomain.html)での連携にも対応しており、
 メディアファイルのURLのみをウェブアクセラレータのサブドメインURLに書き換えることができます。
 
 = Features =
