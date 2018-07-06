@@ -34,7 +34,7 @@ function sacloud_webaccel_start()
 
         // for media(attachment)
         if (sacloud_webaccel_get_option("use-subdomain") == 1) {
-            //add_filter('wp_get_attachment_url', 'sacloud_webaccel_subdomain_url');
+            add_filter('wp_get_attachment_url', 'sacloud_webaccel_subdomain_url');
             add_filter('wp_calculate_image_srcset', 'sacloud_webaccel_calculate_image_srcset', 10, 5);
             add_filter('the_content', 'sacloud_webaccel_filter_the_content', 888888);
         }

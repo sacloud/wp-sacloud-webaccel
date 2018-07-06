@@ -2,7 +2,7 @@
 
 ![eye-catch.jpg](docs/images/eye-catch.jpg)
 
-WordPressと[さくらのクラウド ウェブアクセラレータ](http://cloud.sakura.ad.jp/specification/option/#option-content05)との連携を行うためのプラグインです。
+WordPressと[さくらのクラウド ウェブアクセラレータ](https://cloud.sakura.ad.jp/specification/web-accelerator/)との連携を行うためのプラグインです。
 
 ウェブアクセラレータを利用すると、オリジンサーバーへの負荷を最小限にしつつ、
 アクセス急増時でも安定してサイトを表示することができます。

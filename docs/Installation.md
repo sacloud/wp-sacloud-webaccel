@@ -73,8 +73,9 @@ APIキーを作成したら、以下の値を控えておいてください。
 
 以下のマニュアルを参考に設定を行ってください。
 
-  - 独自ドメイン型の場合：[利用手順(独自ドメイン)](http://cloud-news.sakura.ad.jp/webaccel/manual01/)
-  - サブドメイン型の場合：[利用手順(サブドメイン)](http://cloud-news.sakura.ad.jp/webaccel/manual02/)
+  - 独自ドメイン型の場合：[ 初期設定（独自ドメイン利用）](https://manual.sakura.ad.jp/cloud/webaccel/manual/settings-domain.html)
+  - 独自ドメインのサブドメイン型の場合：[初期設定（独自ドメインにサブドメインを新規設定して利用）](https://manual.sakura.ad.jp/cloud/webaccel/manual/settings-domain-add-subdomain.html)
+  - *.webaccel.jp のサブドメイン型の場合：[初期設定（サブドメイン利用） ](https://manual.sakura.ad.jp/cloud/webaccel/manual/settings-subdomain.html)
 
 #### サブドメイン名の確認(サブドメイン型の場合のみ必要)
 
