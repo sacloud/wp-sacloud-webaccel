@@ -4,7 +4,7 @@
 
 ![eye-catch.jpg](images/eye-catch.jpg)
 
-`wp-sacloud-webaccel`は、WordPressと[さくらのクラウド ウェブアクセラレータ](http://cloud.sakura.ad.jp/specification/option/#option-content05)を連携させるためのプラグインです。
+`wp-sacloud-webaccel`は、WordPressと[さくらのクラウド ウェブアクセラレータ](https://cloud.sakura.ad.jp/specification/web-accelerator/)を連携させるためのプラグインです。
 
 以下のような機能を持っています。
 
