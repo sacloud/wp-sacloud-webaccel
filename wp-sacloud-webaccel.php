@@ -1149,7 +1149,6 @@ function sacloud_webaccel_send_cache_header()
     // 2) ページング2ページ目以降はキャッシュしない
     // 3) 検索結果ページはキャッシュしない
     // ただし画像(直リンク)は.htaccessで処理しているため全てキャッシュ対象となる
-    // 4) カスタムフィールド sacloud_nocache に 1 が入っているページはキャッシュしない
     if (!is_user_logged_in() && !is_paged() && !is_search()) {
         if (!$send_header && sacloud_webaccel_get_option("enable-page") == "1") {
             $send_header = is_front_page() || is_home();
@@ -1162,11 +1161,6 @@ function sacloud_webaccel_send_cache_header()
             // for comment feed (http(s)://host/wp/comments
             if (!$send_header && is_feed()) {
                 $send_header = true;
-            }
-
-            if ( get_post_meta( get_the_ID(), 'sacloud_nocache', true ) == "1" ) {
-                $send_header = false;
-                nocache_headers();
             }
         }
         if (!$send_header && sacloud_webaccel_get_option("enable-media") == "1") {
