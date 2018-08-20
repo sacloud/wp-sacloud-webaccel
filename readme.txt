@@ -67,6 +67,8 @@ https://github.com/yamamoto-febc/wp-sacloud-webaccel
 
 == Changelog ==
 
+0.0.7 : [サブドメイン利用時のwp_get_attachment_url利用によるURL書き換え対応,sacloud_nocacheカスタムフィールドでのキャッシュ無効化の制御](https://github.com/yamamoto-febc/wp-sacloud-webaccel/releases/tag/v0.0.7)
+
 0.0.6 : [キャッシュ全削除APIを利用](https://github.com/yamamoto-febc/wp-sacloud-webaccel/releases/tag/v0.0.6)
 
 0.0.4 : [サブドメイン型でのURL書き換えにてsrcset属性の書き換えに対応](https://github.com/yamamoto-febc/wp-sacloud-webaccel/releases/tag/v0.0.4)
