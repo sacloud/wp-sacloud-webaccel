@@ -1197,7 +1197,7 @@ function sacloud_webaccel_subdomain_url($wpurl)
 {
 
     $isSubdomain = sacloud_webaccel_get_option('use-subdomain') == '1';
-    if (!$isSubdomain) {
+    if ( !$isSubdomain || is_admin() ) {
         return $wpurl;
     }
 
