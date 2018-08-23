@@ -1,10 +1,10 @@
 === wp-sacloud-webaccel ===
 Contributors: yamamotofebc
 Donate link:
-Tags: SakuraCloud, アクセラレータ, さくらのクラウド, さくらインターネット, 一方通行, CDN
+Tags: SakuraCloud, ウェブアクセラレータ, さくらのクラウド, さくらインターネット, 一方通行, CDN
 Requires at least: 4.5.3
 Tested up to: 4.9.8
-Stable tag: 0.0.7
+Stable tag: 0.0.8
 License: GPLv3 or later.
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -66,6 +66,8 @@ https://github.com/yamamoto-febc/wp-sacloud-webaccel
 1. screenshot-1.png
 
 == Changelog ==
+
+0.0.8 : [サブドメイン利用時の画像URL書き換えを管理画面では行わない](https://github.com/yamamoto-febc/wp-sacloud-webaccel/releases/tag/v0.0.8)
 
 0.0.7 : [サブドメイン利用時のwp_get_attachment_url利用によるURL書き換え対応,sacloud_nocacheカスタムフィールドでのキャッシュ無効化の制御](https://github.com/yamamoto-febc/wp-sacloud-webaccel/releases/tag/v0.0.7)
 
