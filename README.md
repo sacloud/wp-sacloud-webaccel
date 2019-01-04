@@ -47,4 +47,4 @@ GPLv3
 
 # Copyright
 
-Copyright 2016 Kazumichi Yamamoto
+Copyright 2016-2019 Kazumichi Yamamoto
