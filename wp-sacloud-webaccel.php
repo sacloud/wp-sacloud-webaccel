@@ -24,12 +24,12 @@ function sacloud_webaccel_start()
 
     // for admin WebUI
     add_action('admin_menu', 'sacloud_webaccel_add_pages');
-    add_action('admin_init', 'sacloud_webaccel_options');
+    add_action('admin_init', 'sacloud_webaccel_admin_init');
     add_action('wp_ajax_sacloud_webaccel_connect_test', 'sacloud_webaccel_connect_test');
 
     add_filter('plugin_action_links_' . plugin_basename(__FILE__), 'sacloud_webaccel_add_action_links');
 
-    if (sacloud_webaccel_auth()) {
+    if (sacloud_webacces_has_valid_settings()) {
         add_action('admin_bar_menu', 'sacloud_webaccel_toolbar_purge_item', 100);
 
         // for media(attachment)
@@ -131,6 +131,12 @@ function sacloud_webaccel_toolbar_purge_item($admin_bar)
     );
 }
 
+function sacloud_webaccel_admin_init() {
+    if (!sacloud_webaccel_auth()) {
+        add_action('admin_notices', 'sacloud_webaccel_show_incomplete_setting_notice');
+    }
+    sacloud_webaccel_options();
+}
 
 function sacloud_webaccel_options()
 {
@@ -929,6 +935,11 @@ function sacloud_webaccel_connect_test()
     }
 }
 
+function sacloud_webacces_has_valid_settings() {
+    $options = sacloud_webaccel_get_options();
+    return strcmp( $options['api-key'] , '') != 0 && strcmp($options['api-secret'] , '') != 0;
+}
+
 function sacloud_webaccel_auth($force = false)
 {
     try {
@@ -1033,10 +1044,7 @@ function sacloud_webaccel_handle_htaccess_file($options = null)
         return 1; //success
     }
 
-    try {
-        $client = createApiClient($options['api-key'], $options['api-secret'], $options['api-zone'], true);
-        $client->Auth();
-    } catch (Exception $ex) {
+    if (!sacloud_webacces_has_valid_settings()) {
         return -1;
     }
 
