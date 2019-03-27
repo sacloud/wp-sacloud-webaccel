@@ -1154,21 +1154,27 @@ function sacloud_webaccel_send_cache_header()
     $send_header = false;
 
     // 1) ログインユーザーのリクエストは全てキャッシュしない
-    // 2) ページング2ページ目以降はキャッシュしない
-    // 3) 検索結果ページはキャッシュしない
+    // 2) ページング2ページ目以降は設定によりキャッシュしない
+    // 3) 検索結果ページは設定によりキャッシュしない
     // ただし画像(直リンク)は.htaccessで処理しているため全てキャッシュ対象となる
     // 4) カスタムフィールド sacloud_nocache に 1 が入っているページはキャッシュしない
-    if (!is_user_logged_in() && !is_paged() && !is_search()) {
-        if (!$send_header && sacloud_webaccel_get_option("enable-page") == "1") {
+    if ( !is_user_logged_in() ) {
+        if ( !$send_header && sacloud_webaccel_get_option("enable-page") == "1" ) {
             $send_header = is_front_page() || is_home();
         }
-        if (!$send_header && sacloud_webaccel_get_option("enable-post") == "1") {
+        if ( !$send_header && sacloud_webaccel_get_option("enable-paged") == "1" ) {
+            $send_header = is_paged();
+        }
+        if ( !$send_header && sacloud_webaccel_get_option("enable-search") == "1" ) {
+            $send_header = is_search ();
+        }
+        if ( !$send_header && sacloud_webaccel_get_option("enable-post") == "1" ) {
             //コメント送信者のリクエストの場合はキャッシュしない
             $commenter = wp_get_current_commenter();
             $send_header = !is_preview() && $commenter['comment_author_email'] === "" && (is_single() || is_page() || is_404());
 
             // for comment feed (http(s)://host/wp/comments
-            if (!$send_header && is_feed()) {
+            if ( !$send_header && is_feed() ) {
                 $send_header = true;
             }
 
@@ -1177,10 +1183,10 @@ function sacloud_webaccel_send_cache_header()
                 nocache_headers();
             }
         }
-        if (!$send_header && sacloud_webaccel_get_option("enable-media") == "1") {
+        if ( !$send_header && sacloud_webaccel_get_option("enable-media") == "1" ) {
             $send_header = is_attachment(); //画像への直リンクは.htaccessで対応する
         }
-        if (!$send_header && sacloud_webaccel_get_option("enable-archive") == "1") {
+        if ( !$send_header && sacloud_webaccel_get_option("enable-archive") == "1" ) {
             $send_header = is_archive();
         }
 
