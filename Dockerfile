@@ -1,7 +1,4 @@
-FROM wordpress:latest
-#FROM wordpress:4.5.3
-#FROM wordpress:4.6.0
-#FROM wordpress:4.7.1
+FROM wordpress:5.8.0
 
 MAINTAINER Kazumichi Yamamoto <yamamoto.febc@gmail.com>
 
