@@ -1,10 +1,10 @@
 === wp-sacloud-webaccel ===
 Contributors: yamamotofebc
 Donate link:
-Tags: SakuraCloud, ウェブアクセラレータ, さくらのクラウド, さくらインターネット, 一方通行, CDN
+Tags: SakuraCloud, ウェブアクセラレータ, さくらのクラウド, さくらインターネット, CDN
 Requires at least: 4.5.3
-Tested up to: 5.0.3
-Stable tag: 0.0.9
+Tested up to: 5.8.0
+Stable tag: 0.0.10
 License: GPLv3 or later.
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 

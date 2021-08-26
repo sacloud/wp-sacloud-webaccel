@@ -9,8 +9,6 @@ WordPressと[さくらのクラウド ウェブアクセラレータ](https://cl
 
 このプラグインを利用することで、煩雑な設定を行うことなくウェブアクセラレータが利用できるようになります。
 
-**注意:現在はβテスト中です。運用環境への適用の際は事前に十分な検証を行ってください。**
-
 
 ## 主な機能/特徴
 
@@ -47,4 +45,4 @@ GPLv3
 
 # Copyright
 
-Copyright 2016-2019 Kazumichi Yamamoto
+Copyright 2016-2021 Kazumichi Yamamoto
