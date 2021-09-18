@@ -1230,13 +1230,15 @@ function sacloud_webaccel_calculate_image_srcset($sources, $size_array, $image_s
     $protocol = sacloud_webaccel_get_option('subdomain-ssl') == '1' ? "https://" : "http://";
     $subdomain = sacloud_webaccel_get_option('subdomain-name') . ".user.webaccel.jp";
 
-    foreach ($sources as &$src) {
-        $url = $src['url'];
+    if (is_array($sources)) {
+        foreach ($sources as &$src) {
+            $url = $src['url'];
 
-        $path = str_replace($homeURL, '', $url);
-        $src['url'] = $protocol . $subdomain . $path;
+            $path = str_replace($homeURL, '', $url);
+            $src['url'] = $protocol . $subdomain . $path;
+        }
+        return $sources;
     }
-    return $sources;
 }
 
 /**
