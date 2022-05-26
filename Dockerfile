@@ -1,4 +1,4 @@
-FROM wordpress:5.8.0
+FROM wordpress:6.0-apache
 
 MAINTAINER Kazumichi Yamamoto <yamamoto.febc@gmail.com>
 
