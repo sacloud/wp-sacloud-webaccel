@@ -45,4 +45,4 @@ GPLv3
 
 # Copyright
 
-Copyright 2016-2021 Kazumichi Yamamoto
+Copyright 2016-2022 Kazumichi Yamamoto
