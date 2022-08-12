@@ -9,6 +9,7 @@ WordPressと[さくらのクラウド ウェブアクセラレータ](https://cl
 
 このプラグインを利用することで、煩雑な設定を行うことなくウェブアクセラレータが利用できるようになります。
 
+**Note: このリポジトリは[yamamoto-febc/wp-sacloud-webaccel](https://github.com/yamamoto-febc/wp-sacloud-webaccel)から[sacloud/wp-sacloud/webaccel](https://github.com/sacloud/wp-sacloud-webaccel)へ移管されました**
 
 ## 主な機能/特徴
 
