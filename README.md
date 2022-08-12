@@ -46,3 +46,4 @@ GPLv3
 # Copyright
 
 Copyright 2016-2022 Kazumichi Yamamoto
+Copyright 2022 The wp-sacloud-webaccel authors

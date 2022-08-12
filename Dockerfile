@@ -1,6 +1,6 @@
 FROM wordpress:6.0-apache
 
-MAINTAINER Kazumichi Yamamoto <yamamoto.febc@gmail.com>
+MAINTAINER Sacloud Users<sacloud.users@gmail.com>
 
 RUN apt-get update && apt-get install -y git vim
 RUN a2enmod headers
