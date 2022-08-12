@@ -1,5 +1,5 @@
 === wp-sacloud-webaccel ===
-Contributors: yamamotofebc
+Contributors: yamamotofebc,sacloudusers
 Donate link:
 Tags: SakuraCloud, ウェブアクセラレータ, さくらのクラウド, さくらインターネット, CDN
 Requires at least: 4.5.3
