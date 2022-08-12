@@ -4,8 +4,8 @@
  * Plugin Name: wp-sacloud-webaccel
  * Plugin URI: https://github.com/yamamoto-febc/wp-sacloud-webaccel
  * Description: WordPressとさくらのクラウド ウェブアクセラレータを連携させるためのプラグイン
- * Author: Kazumichi Yamamoto
- * Author URI: https://github.com/yamamoto-febc
+ * Author: Sacloud Users<sacloud.users@gmail.com)
+ * Author URI: https://github.com/sacloud-bot
  * Text Domain: wp-sacloud-webaccel
  * Version: 0.0.11
  * License: GPLv3
