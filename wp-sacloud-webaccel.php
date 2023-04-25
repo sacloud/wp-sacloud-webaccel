@@ -1517,6 +1517,8 @@ class SacloudClient
 
         if (!$res) {
             throw new Exception("AuthError : Unknown error");
+        } elseif (is_wp_error($res)) {
+            throw new Exception(sprintf("Error : WPError: [%s]", print_r($res, true)));
         } elseif (isset($res['is_fatal']) && $res['is_fatal'] === true) {
             throw new Exception("AuthError : " . $res['error_msg']);
         } elseif (strpos($res['ExternalPermission'], 'cdn') === false) {
@@ -1561,6 +1563,8 @@ class SacloudClient
 
             if (!$res) {
                 throw new Exception("Error : Unknown error");
+            } elseif (is_wp_error($res)) {
+                throw new Exception(sprintf("Error : WPError: [%s]", print_r($res, true)));
             } elseif (isset($res['is_fatal']) && $res['is_fatal'] === true) {
                 throw new Exception("Error : " . $res['error_msg']);
             }
@@ -1577,6 +1581,8 @@ class SacloudClient
 
         if (!$res) {
             throw new Exception("Error : Unknown error");
+        } elseif (is_wp_error($res)) {
+            throw new Exception(sprintf("Error : WPError: [%s]", print_r($res, true)));
         } elseif (isset($res['is_fatal']) && $res['is_fatal'] === true) {
             throw new Exception("Error : " . $res['error_msg']);
         }
@@ -1611,8 +1617,11 @@ class SacloudClient
 
     private function Get($url)
     {
-        $response = wp_remote_retrieve_body(wp_remote_get($url, $this->getRequestArgs()));
-        $result = json_decode($response, true);
+        $response = wp_remote_get($url, $this->getRequestArgs());
+        if (is_wp_error($response)) {
+            return $response;
+        }
+        $result = json_decode(wp_remote_retrieve_body($response), true);
         return $result;
     }
 
@@ -1620,8 +1629,12 @@ class SacloudClient
     {
         $args = $this->getRequestArgs();
         $args['body'] = json_encode($data);
-        $response = wp_remote_retrieve_body(wp_remote_post($url, $args));
-        $result = json_decode($response, true);
+
+        $response = wp_remote_post($url, $args);
+        if (is_wp_error($response)) {
+            return $response;
+        }
+        $result = json_decode(wp_remote_retrieve_body($response), true);
 
         return $result;
     }
