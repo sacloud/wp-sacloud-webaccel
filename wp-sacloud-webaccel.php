@@ -1629,6 +1629,7 @@ class SacloudClient
     {
         $args = $this->getRequestArgs();
         $args['body'] = json_encode($data);
+        $args['timeout'] = 60;
 
         $response = wp_remote_post($url, $args);
         if (is_wp_error($response)) {
