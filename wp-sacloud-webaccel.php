@@ -1520,7 +1520,7 @@ class SacloudClient
         } elseif (is_wp_error($res)) {
             throw new Exception(sprintf("Error : WPError: [%s]", print_r($res, true)));
         } elseif (isset($res['is_fatal']) && $res['is_fatal'] === true) {
-            throw new Exception("AuthError : " . $res['error_msg']);
+            throw new Exception(sprintf("AuthError: [%s]", print_r($res, true)));
         } elseif (strpos($res['ExternalPermission'], 'cdn') === false) {
             throw new Exception("AuthError : Is not have CDN permission ");
         }
@@ -1564,9 +1564,9 @@ class SacloudClient
             if (!$res) {
                 throw new Exception("Error : Unknown error");
             } elseif (is_wp_error($res)) {
-                throw new Exception(sprintf("Error : WPError: [%s]", print_r($res, true)));
+                throw new Exception(sprintf("WPError: [%s]", print_r($res, true)));
             } elseif (isset($res['is_fatal']) && $res['is_fatal'] === true) {
-                throw new Exception("Error : " . $res['error_msg']);
+                throw new Exception(sprintf("WebAccel API Error: [%s]", print_r($res, true)));
             }
             sacloud_webaccel_log(sprintf("Posted delete cache request to [%s]", print_r($d, true)));
         }
@@ -1582,9 +1582,9 @@ class SacloudClient
         if (!$res) {
             throw new Exception("Error : Unknown error");
         } elseif (is_wp_error($res)) {
-            throw new Exception(sprintf("Error : WPError: [%s]", print_r($res, true)));
+            throw new Exception(sprintf("WPError: [%s]", print_r($res, true)));
         } elseif (isset($res['is_fatal']) && $res['is_fatal'] === true) {
-            throw new Exception("Error : " . $res['error_msg']);
+            throw new Exception(sprintf("WebAccel API Error: [%s]", print_r($res, true)));
         }
         sacloud_webaccel_log(sprintf("Posted delete all cache request to [%s]", print_r($data, true)));
         return true;
