@@ -140,7 +140,7 @@ Next : [[設定 / Settings]](Settings.md)
 
 zipファイルは以下からダウンロード可能です。
 
-[GitHub:wp-sacloud-webaccelリリースページ](https://github.com/yamamoto-febc/wp-sacloud-webaccel/releases/latest)
+[GitHub:wp-sacloud-webaccelリリースページ](https://github.com/sacloud/wp-sacloud-webaccel/releases/latest)
 
 GitHubからソースコードを直接取得する場合は次のようにしてください。
 
@@ -153,7 +153,7 @@ GitHubからソースコードを直接取得する場合は次のようにし�
 cd [WORDPRESS_ROOT]/wp-content/plugins
 
 # Clone plugin repository
-git clone https://github.com/yamamoto-febc/wp-sacloud-webaccel
+git clone https://github.com/sacloud/wp-sacloud-webaccel
 cd wp-sacloud-webaccel
 
 ```

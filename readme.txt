@@ -45,7 +45,7 @@ WordPressとさくらのクラウド ウェブアクセラレータを連携さ�
 
 = 使い方とサポート =
 
-[GitHub](https://github.com/yamamoto-febc/wp-sacloud-webaccel/blob/master/docs/README.md)では、プラグインのインストール方法や設定方法などを掲載しています。
+[GitHub](https://github.com/sacloud/wp-sacloud-webaccel/blob/master/docs/README.md)では、プラグインのインストール方法や設定方法などを掲載しています。
 
 == Installation ==
 
@@ -55,12 +55,12 @@ WordPressとさくらのクラウド ウェブアクセラレータを連携さ�
 
 ダッシュボードの『プラグイン新規追加』からの追加も可能です。
 
-インストール後の設定については[GitHub上のドキュメント「インストール/設定」](https://github.com/yamamoto-febc/wp-sacloud-webaccel/blob/master/docs/README.md)を参照してください。
+インストール後の設定については[GitHub上のドキュメント「インストール/設定」](https://github.com/sacloud/wp-sacloud-webaccel/blob/master/docs/README.md)を参照してください。
 
 == Frequently Asked Questions ==
 
 お問い合わせはGitHubのIssueにてお願い致します。
-https://github.com/yamamoto-febc/wp-sacloud-webaccel
+https://github.com/sacloud/wp-sacloud-webaccel
 
 == Screenshots ==
 1. screenshot-1.png
