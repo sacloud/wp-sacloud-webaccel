@@ -29,7 +29,7 @@
 				<tr>
 						<th><?php _e('SakuraCloud API Secret', 'wp-sacloud-webaccel') ?>:</th>
 						<td>
-								<input id="sacloud-webaccel-api-secret" name="sacloud-webaccel-options[api-secret]" type="text"
+								<input id="sacloud-webaccel-api-secret" name="sacloud-webaccel-options[api-secret]" type="password"
 												size="15" value="<?php echo esc_attr(
 																				sacloud_webaccel_get_option('api-secret')
 																				 ); ?>"  class="regular-text code"/>
