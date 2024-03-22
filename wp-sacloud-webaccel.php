@@ -1010,15 +1010,13 @@ function sacloud_webaccel_parse_images_from_html($content)
 
 function sacloud_webaccel_is_supported_app_server()
 {
-    //figure out what server they're using
-    if (strstr(strtolower(filter_var($_SERVER['SERVER_SOFTWARE'], FILTER_SANITIZE_STRING)), 'apache')) {
-        $aiowps_server = 'apache';
-    } else if (strstr(strtolower(filter_var($_SERVER['SERVER_SOFTWARE'], FILTER_SANITIZE_STRING)), 'nginx')) {
-        $aiowps_server = 'nginx';
-    } else { //unsupported server
-        return -1;
+    $serverSoftware = strtolower($_SERVER['SERVER_SOFTWARE']);
+    if (strstr($serverSoftware, 'apache') || strstr($serverSoftware, 'nginx')) {
+        return 1;
     }
-    return 1;
+
+    // unsupported server
+    return -1;
 }
 
 function sacloud_webaccel_handle_htaccess_file($options = null)
