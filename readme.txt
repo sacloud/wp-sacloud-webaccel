@@ -3,8 +3,8 @@ Contributors: yamamotofebc,sacloudusers
 Donate link:
 Tags: SakuraCloud, ウェブアクセラレータ, さくらのクラウド, さくらインターネット, CDN
 Requires at least: 4.5.3
-Tested up to: 6.4.3
-Stable tag: 0.0.13
+Tested up to: 6.5.0
+Stable tag: 0.0.14
 License: GPLv3 or later.
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -66,6 +66,8 @@ https://github.com/sacloud/wp-sacloud-webaccel
 1. screenshot-1.png
 
 == Changelog ==
+
+0.0.14: [アクセストークン入力欄をtype: passwordに](https://github.com/sacloud/wp-sacloud-webaccel/releases/tag/v0.0.14)
 
 0.0.9 : [冗長なAPI呼び出しの抑制](https://github.com/yamamoto-febc/wp-sacloud-webaccel/releases/tag/v0.0.8)
 
