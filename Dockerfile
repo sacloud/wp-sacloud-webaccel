@@ -1,4 +1,4 @@
-FROM wordpress:6.0-apache
+FROM wordpress:6.8-apache
 
 MAINTAINER Sacloud Users<sacloud.users@gmail.com>
 
