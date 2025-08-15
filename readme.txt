@@ -3,7 +3,7 @@ Contributors: yamamotofebc,sacloudusers
 Donate link:
 Tags: SakuraCloud, ウェブアクセラレータ, さくらのクラウド, さくらインターネット, CDN
 Requires at least: 4.5.3
-Tested up to: 6.5.0
+Tested up to: 6.8.2
 Stable tag: 0.0.14
 License: GPLv3 or later.
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
