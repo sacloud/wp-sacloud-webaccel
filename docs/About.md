@@ -4,17 +4,17 @@
 
 ![eye-catch.jpg](images/eye-catch.jpg)
 
-`wp-sacloud-webaccel`は、WordPressと[さくらのクラウド ウェブアクセラレータ](https://cloud.sakura.ad.jp/specification/web-accelerator/)を連携させるためのプラグインです。
+`wp-sacloud-webaccel`は、WordPressと[さくらのウェブアクセラレータ](https://cloud.sakura.ad.jp/specification/web-accelerator/)を連携させるためのプラグインです。
 
 以下のような機能を持っています。
 
 ### [Cache-Controlレスポンスヘッダの出力](#cache-controlレスポンスヘッダの出力)
 
-ウェブアクセラレータにWordPressのコンテンツをキャッシュさせるために、`Cache-Control`レスポンスヘッダを出力します。
+さくらのウェブアクセラレータにWordPressのコンテンツをキャッシュさせるために、`Cache-Control`レスポンスヘッダを出力します。
 
 ### [APIでのキャッシュ自動削除](#apiでのキャッシュ自動削除)
 
-WordPress上のデータ更新時に、ウェブアクセラレータのキャッシュ削除APIを呼び出してキャッシュ削除します。
+WordPress上のデータ更新時に、さくらのウェブアクセラレータのキャッシュ削除APIを呼び出してキャッシュ削除します。
 
 例えば、記事の更新/コメントの承認などを行った場合、以下のようなページについてキャッシュ削除が行われます。
  
@@ -31,9 +31,9 @@ WordPress上のデータ更新時に、ウェブアクセラレータのキャ�
 
 ### [メディアファイルのURL動的書き替え](#メディアファイルのurl動的書き替え)
 
-ウェブアクセラレータをサブドメイン型で利用する場合のための機能です。
+さくらのウェブアクセラレータをサブドメイン型で利用する場合のための機能です。
 
-メディアファイルの参照元URLをウェブアクセラレータのサブドメイン(*.user.webaccel.jp)へ向けて動的に書き換えることが出来ます。
+メディアファイルの参照元URLをさくらのウェブアクセラレータのサブドメイン(*.user.webaccel.jp)へ向けて動的に書き換えることが出来ます。
 
 [JetPack/Photon](https://jetpack.com)などと同じく、データベース上の記事データは更新せずに、リクエスト時に動的にURLを書き換える方式です。
 

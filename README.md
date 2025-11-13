@@ -2,12 +2,12 @@
 
 ![eye-catch.jpg](docs/images/eye-catch.jpg)
 
-WordPressと[さくらのクラウド ウェブアクセラレータ](https://cloud.sakura.ad.jp/specification/web-accelerator/)との連携を行うためのプラグインです。
+WordPressと[さくらのウェブアクセラレータ](https://cloud.sakura.ad.jp/specification/web-accelerator/)との連携を行うためのプラグインです。
 
-ウェブアクセラレータを利用すると、オリジンサーバーへの負荷を最小限にしつつ、
+さくらのウェブアクセラレータを利用すると、オリジンサーバーへの負荷を最小限にしつつ、
 アクセス急増時でも安定してサイトを表示することができます。
 
-このプラグインを利用することで、煩雑な設定を行うことなくウェブアクセラレータが利用できるようになります。
+このプラグインを利用することで、煩雑な設定を行うことなくさくらのウェブアクセラレータが利用できるようになります。
 
 **Note: このリポジトリは[yamamoto-febc/wp-sacloud-webaccel](https://github.com/yamamoto-febc/wp-sacloud-webaccel)から[sacloud/wp-sacloud/webaccel](https://github.com/sacloud/wp-sacloud-webaccel)へ移管されました**
 

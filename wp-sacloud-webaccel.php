@@ -3,7 +3,7 @@
 /**
  * Plugin Name: wp-sacloud-webaccel
  * Plugin URI: https://github.com/sacloud/wp-sacloud-webaccel
- * Description: WordPressとさくらのクラウド ウェブアクセラレータを連携させるためのプラグイン
+ * Description: WordPressとさくらのウェブアクセラレータを連携させるためのプラグイン
  * Author: Sacloud Users
  * Author URI: https://github.com/sacloud-bot
  * Text Domain: wp-sacloud-webaccel

@@ -1,26 +1,45 @@
-msgid ""
-msgstr ""
-"Project-Id-Version: \n"
-"POT-Creation-Date: 2016-11-29 09:09+0900\n"
-"PO-Revision-Date: 2016-11-29 09:09+0900\n"
-"Last-Translator: \n"
-"Language-Team: \n"
-"Language: ja\n"
+# Copyright (C) 2025 Sacloud Users
+# This file is distributed under the GPLv3.
+"Project-Id-Version: wp-sacloud-webaccel 0.0.15\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/wp-sacloud-webaccel\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.8.11\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Poedit-KeywordsList: _e;__\n"
-"X-Poedit-Basepath: ..\n"
-"X-Poedit-SearchPath-0: lang\n"
-"X-Poedit-SearchPath-1: tpl\n"
-"X-Poedit-SearchPath-2: wp-sacloud-webaccel.php\n"
-"X-Poedit-SearchPath-3: wp-cli.php\n"
+"POT-Creation-Date: 2025-11-13T23:19:35+00:00\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"X-Generator: WP-CLI 2.12.0\n"
+"X-Domain: wp-sacloud-webaccel\n"
+
+#. Plugin Name of the plugin
+#: wp-sacloud-webaccel.php
+msgid "wp-sacloud-webaccel"
+msgstr ""
+
+#. Plugin URI of the plugin
+#: wp-sacloud-webaccel.php
+msgid "https://github.com/sacloud/wp-sacloud-webaccel"
+msgstr ""
+
+#. Description of the plugin
+#: wp-sacloud-webaccel.php
+msgid "WordPressとさくらのウェブアクセラレータを連携させるためのプラグイン"
+msgstr ""
+
+#. Author of the plugin
+#: wp-sacloud-webaccel.php
+msgid "Sacloud Users"
+msgstr ""
+
+#. Author URI of the plugin
+#: wp-sacloud-webaccel.php
+msgid "https://github.com/sacloud-bot"
+msgstr ""
 
 #: tpl/setting.php:10
 msgid "Setting SakuraCloud WebAccelerator"
-msgstr "さくらのクラウド ウェブアクセラレータ設定"
+msgstr "さくらのウェブアクセラレータ設定"
 
 #: tpl/setting.php:11
 msgid "Please Input the API tokens for the SakuraCloud. No account? Let's "
@@ -105,10 +124,8 @@ msgid "Domain settings"
 msgstr "ドメイン設定"
 
 #: tpl/setting.php:107
-msgid ""
-"When you enable the SubDomain , URL rewriting of the mediafile is enabled"
-msgstr ""
-"サブドメインを有効にすると、メディアファイルのURLにウェブアクセラレータのサブ"
+msgid "When you enable the SubDomain , URL rewriting of the mediafile is enabled"
+msgstr "サブドメインを有効にすると、メディアファイルのURLにさくらのウェブアクセラレータのサブ"
 "ドメインを利用するようになります。"
 
 #: tpl/setting.php:112
@@ -149,8 +166,7 @@ msgstr "`WP_DEBUG`を設定する必要があります"
 
 #: wp-cli.php:26
 msgid "API Token Authentication error"
-msgstr ""
-"APIトークンでの認証に失敗しました。管理画面からAPIトークンの設定を修正してく"
+msgstr "APIトークンでの認証に失敗しました。管理画面からAPIトークンの設定を修正してく"
 "ださい。"
 
 #: wp-cli.php:33
@@ -159,230 +175,80 @@ msgstr "キャッシュを全件削除しました"
 
 #: wp-sacloud-webaccel.php:90
 msgid "WebAccelerator settings is incompleted"
-msgstr "ウェブアクセラレータの設定が完了していません。"
+msgstr "さくらのウェブアクセラレータの設定が完了していません。"
 
-#: wp-sacloud-webaccel.php:90 wp-sacloud-webaccel.php:110
+#: wp-sacloud-webaccel.php:90
+#: wp-sacloud-webaccel.php:110
 msgid "Settings"
 msgstr "設定"
 
 #: wp-sacloud-webaccel.php:95
 msgid "WebAccelerator"
-msgstr "ウェブアクセラレータ"
+msgstr "さくらのウェブアクセラレータ"
 
-#: wp-sacloud-webaccel.php:125 wp-sacloud-webaccel.php:128
+#: wp-sacloud-webaccel.php:125
+#: wp-sacloud-webaccel.php:128
 msgid "Purge Cache"
 msgstr "キャッシュ削除"
 
 #: wp-sacloud-webaccel.php:129
 msgid "Are you sure you want to delete the WebAccelerator cache?"
-msgstr "ウェブアクセラレータのキャッシュを削除します。よろしいですか？"
+msgstr "さくらのウェブアクセラレータのキャッシュを削除します。よろしいですか？"
 
-#: wp-sacloud-webaccel.php:182 wp-sacloud-webaccel.php:188
+#: wp-sacloud-webaccel.php:188
+#: wp-sacloud-webaccel.php:194
 #, php-format
 msgid "%s is required."
 msgstr "%s を入力してください"
 
-#: wp-sacloud-webaccel.php:182 wp-sacloud-webaccel.php:206
+#: wp-sacloud-webaccel.php:188
+#: wp-sacloud-webaccel.php:212
 msgid "api-key"
 msgstr "アクセストークン"
 
-#: wp-sacloud-webaccel.php:188 wp-sacloud-webaccel.php:219
+#: wp-sacloud-webaccel.php:194
+#: wp-sacloud-webaccel.php:225
 msgid "api-secret"
 msgstr "アクセスシークレット"
 
-#: wp-sacloud-webaccel.php:206 wp-sacloud-webaccel.php:219
-#: wp-sacloud-webaccel.php:231
+#: wp-sacloud-webaccel.php:212
+#: wp-sacloud-webaccel.php:225
+#: wp-sacloud-webaccel.php:237
 #, php-format
 msgid "%s is too long."
 msgstr "%s が長すぎます。"
 
-#: wp-sacloud-webaccel.php:231
+#: wp-sacloud-webaccel.php:237
 msgid "subdomain-name"
 msgstr "サブドメイン名"
 
-#: wp-sacloud-webaccel.php:243
+#: wp-sacloud-webaccel.php:249
 #, php-format
 msgid "%s is allowed number only."
 msgstr "%s は数値を入力してください"
 
-#: wp-sacloud-webaccel.php:243 wp-sacloud-webaccel.php:250
+#: wp-sacloud-webaccel.php:249
+#: wp-sacloud-webaccel.php:256
 msgid "maxage"
 msgstr "キャッシュ秒数"
 
-#: wp-sacloud-webaccel.php:250
+#: wp-sacloud-webaccel.php:256
 #, php-format
 msgid "%s is neet between %d and %d."
 msgstr "%s は %d から%d の範囲で入力してください"
 
-#: wp-sacloud-webaccel.php:269
+#: wp-sacloud-webaccel.php:275
 msgid "subdomina-name is required when use-subdomain"
 msgstr "サブドメインを利用する場合、サブドメイン名の入力は必須です"
 
-#: wp-sacloud-webaccel.php:669
+#: wp-sacloud-webaccel.php:675
 msgid "Start purge_all"
 msgstr "アクセラレータキャッシュ削除 開始"
 
-#: wp-sacloud-webaccel.php:692
+#: wp-sacloud-webaccel.php:689
 msgid "Finish purge_all"
 msgstr "アクセラレータキャッシュ削除 終了"
 
-#: wp-sacloud-webaccel.php:902
+#: wp-sacloud-webaccel.php:899
 msgid "Purge initiated"
 msgstr "アクセラレータキャッシュを削除しました"
-
-#: wp-sacloud-webaccel.php:927
-msgid "Connection was Successfully"
-msgstr "接続に成功しました。"
-
-#: wp-sacloud-webaccel.php:934
-msgid "Connection Error"
-msgstr "接続に失敗しました。"
-
-#~ msgid "https://secure.sakura.ad.jp/member-regist/input"
-#~ msgstr "https://secure.sakura.ad.jp/member-regist/input"
-
-#~ msgid "Use SubDomain"
-#~ msgstr "サブドメインを利用する"
-
-#~ msgid "Article"
-#~ msgstr "投稿"
-
-#~ msgid "Cache Article"
-#~ msgstr "投稿をキャッシュする"
-
-#~ msgid "SakuraCloud WebAccel"
-#~ msgstr "ウェブアクセラレータ"
-
-#~ msgid "Cache Media(use .htaccess)"
-#~ msgstr "メディアファイルをキャッシュする(.htaccessを利用)"
-
-#~ msgid "Resynchronization result."
-#~ msgstr "再同期結果"
-
-#~ msgid "Setting SakuraCloud ObjectStorage"
-#~ msgstr "さくらのクラウド オブジェクトストレージ設定"
-
-#~ msgid ""
-#~ "Please Input the API tokens for the SakuraCloud ObjectStorage. No "
-#~ "account? Let's "
-#~ msgstr ""
-#~ "さくらのクラウド オブジェクトストレージのAPIトークン情報を入力してくださ"
-#~ "い。アカウントをお持ちでない場合は会員登録を行ってください。"
-
-#~ msgid "ObjectStorage AccessKey"
-#~ msgstr "アクセスキーID"
-
-#~ msgid "ObjectStorage Secret"
-#~ msgstr "シークレットアクセスキー"
-
-#~ msgid "Bucket Name"
-#~ msgstr "バケットの名前"
-
-#~ msgid "Container Name"
-#~ msgstr "コンテナ名"
-
-#~ msgid "Use SSL protocol"
-#~ msgstr "SSLを利用する"
-
-#~ msgid "Use cache"
-#~ msgstr "キャッシュ"
-
-#~ msgid "Use Cache URL"
-#~ msgstr "キャッシュ配信URLを利用する"
-
-#~ msgid "File Types"
-#~ msgstr "ファイルタイプ"
-
-#~ msgid "Extensions"
-#~ msgstr "拡張子リスト"
-
-#~ msgid ""
-#~ "The media files that has these extensions will be uploaded to the Object "
-#~ "Storage. You can use comma separated format to specify more than "
-#~ "one(Example: \"png,jpg,gif,mov,wmv\")."
-#~ msgstr ""
-#~ "アップロードする拡張子を指定します。拡張子は半角カンマ区切りで複数指定可能"
-#~ "です(例: png,jpg,gif,mov,wmv)。"
-
-#~ msgid "If this field is blank, Everything will be uploaded."
-#~ msgstr "空欄の場合は全てのファイル形式がアップロード対象となります。"
-
-#~ msgid "Resynchronization"
-#~ msgstr "再同期"
-
-#~ msgid ""
-#~ "Resynchronization all media files to the Object Storage. It may take a "
-#~ "long time."
-#~ msgstr ""
-#~ "サーバ上のメディアファイルを全てオブジェクトストレージにアップロードし直し"
-#~ "ます。この実行には時間がかかる場合があります。"
-
-#~ msgid "SakuraCloud ObjectStorage"
-#~ msgstr "さくらのクラウド オブジェクトストレージ"
-
-#~ msgid "Synchronization options"
-#~ msgstr "同期オプション"
-
-#~ msgid ""
-#~ "Delete the object from the object storage when the library file is "
-#~ "deleted."
-#~ msgstr ""
-#~ "ライブラリからメディアが削除されたとき、オブジェクトストレージ上のメディア"
-#~ "も削除する。"
-
-#~ msgid "API Account"
-#~ msgstr "APIアカウント名"
-
-#~ msgid "API Password"
-#~ msgstr "APIパスワード"
-
-#~ msgid "Tenant ID"
-#~ msgstr "テナントID"
-
-#~ msgid "Auth URL"
-#~ msgstr "Auth URL"
-
-#~ msgid "Region"
-#~ msgstr "リージョン"
-
-#~ msgid "Service Name"
-#~ msgstr "サービス名"
-
-#~ msgid ""
-#~ "Container name that media files is uploaded. If the container not found, "
-#~ "It will create automatically."
-#~ msgstr ""
-#~ "メディアファイルが格納させるコンテナ名を指定します。コンテナが存在しない場"
-#~ "合は自動的に作成されます。"
-
-#~ msgid "The plugin will set the ACL to allow public access."
-#~ msgstr ""
-#~ "コンテナにはプラグインによって自動的に公開アクセス権が付与されます。"
-
-#~ msgid ""
-#~ "Type the API informations for the ConoHa Object storage. No account? "
-#~ "Let's "
-#~ msgstr ""
-#~ "ConoHaオブジェクトストレージ(もしくはOpenStackシステム)のAPI情報を入力して"
-#~ "ください。アカウントをお持ちで無い場合はサインアップしてください。"
-
-#~ msgid "https://www.conoha.jp/en/"
-#~ msgstr "https://www.conoha.jp/"
-
-#~ msgid "Setting ConoHa Object Sync"
-#~ msgstr "ConoHa Object Sync設定"
-
-#~ msgid ""
-#~ "The media files that has these extensions will be uploaded to the Object "
-#~ "Storage. You can use comma separated format to specify more than "
-#~ "one(Example: 'png,jpg,gif,mov,wmv')."
-#~ msgstr ""
-#~ "アップロードする拡張子を指定します。拡張子は半角カンマ区切りで複数指定可能"
-#~ "です(例: png,jpg,gif,mov,wmv)。"
-
-#~ msgid ""
-#~ "Delete the uploaded file from the local storage after a successful upload "
-#~ "to the object storage."
-#~ msgstr ""
-#~ "オブジェクトストレージへのアップロードが成功した場合、ローカルからファイル"
-#~ "を削除する。"
