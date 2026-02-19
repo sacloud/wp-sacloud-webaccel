@@ -4,7 +4,7 @@ Donate link:
 Tags: SakuraCloud, さくらのウェブアクセラレータ, ウェブアクセラレータ, さくらのクラウド, さくらインターネット, CDN
 Requires at least: 4.5.3
 Tested up to: 6.9.1
-Stable tag: 0.0.16
+Stable tag: 0.0.17
 License: GPLv3 or later.
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -66,6 +66,8 @@ https://github.com/sacloud/wp-sacloud-webaccel
 1. screenshot-1.png
 
 == Changelog ==
+
+0.0.16: [APIキーのバリデーションにGET /siteを使うように修正,Tested up toを6.9.1に更新](https://github.com/sacloud/wp-sacloud-webaccel/releases/tag/v0.0.17)
 
 0.0.16: [さくらのウェブアクセラレータへ名称変更,Tested up toを6.8.3に更新](https://github.com/sacloud/wp-sacloud-webaccel/releases/tag/v0.0.16)
 

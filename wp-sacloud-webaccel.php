@@ -7,7 +7,7 @@
  * Author: Sacloud Users
  * Author URI: https://github.com/sacloud-bot
  * Text Domain: wp-sacloud-webaccel
- * Version: 0.0.16
+ * Version: 0.0.17
  * License: GPLv3
  */
 
