@@ -149,7 +149,7 @@ function sacloud_webaccel_validate_options($values)
     $default_values = array(
         'api-key' => '',
         'api-secret' => '',
-        'api-zone' => 'tk1a',
+        'api-zone' => 'is1a',
         'use-subdomain' => 0,
         'subdomain-name' => '',
         'subdomain-ssl' => 0,
@@ -1498,7 +1498,6 @@ class SacloudClient
 
     const API_BASE_URL_FORAMT = 'https://secure.sakura.ad.jp/cloud/zone/%s/api/%s';
 
-    const API_CLOUD_SUFFIX = "cloud/1.1/";
     const API_WEBACCEL_SUFFIX = "webaccel/1.0/";
 
     function __construct($key, $secret, $zone)
@@ -1519,8 +1518,6 @@ class SacloudClient
             throw new Exception(sprintf("Error : WPError: [%s]", print_r($res, true)));
         } elseif (isset($res['is_fatal']) && $res['is_fatal'] === true) {
             throw new Exception(sprintf("AuthError: [%s]", print_r($res, true)));
-        } elseif (strpos($res['ExternalPermission'], 'cdn') === false) {
-            throw new Exception("AuthError : Is not have CDN permission ");
         }
         return true;
     }
@@ -1590,7 +1587,7 @@ class SacloudClient
 
     private function getAPIAuthURL()
     {
-        return sprintf(self::API_BASE_URL_FORAMT, $this->zone, self::API_CLOUD_SUFFIX) . "auth-status";
+        return sprintf(self::API_BASE_URL_FORAMT, $this->zone, self::API_WEBACCEL_SUFFIX) . "site";
     }
 
     private function getDeleteCacheURL()
